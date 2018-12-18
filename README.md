@@ -2,7 +2,8 @@ PCI Master Controller and Arbitration Implementation using Verilog
 ****************************************************************************************************************
 This is a team project assigned by Prof. Ashraf Salem in Computer Organization 2 Course at the Faculty of Engineering, Ain Shams University.
 ****************************************************************************************************************
-In this project, it is required to model the whole PCI communication protocol in verilog. There are two main modules : 
+In this project, it is required to model the whole PCI communication protocol in verilog.
+There are two main modules : 
 1- Device
 2- Arbiter
 
