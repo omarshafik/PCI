@@ -1,4 +1,4 @@
-module Read_State_Machine(
+module State_Machine(
     frame, irdy, trdy, devsel, state, clk
 );
 
@@ -9,7 +9,7 @@ reg[2:0] next_state;
 parameter[2:0] 
 /* phases are four; 
 1. idle : bus is free.
-2. address : initiator waiting for a device to identify itself as the target.
+2. address : address only valid for one cycle.
 3. data wait : bus is on hold as any of #RDY signals are deasserted (no transaction occurs).
 4. data : transaction occurs.
 5. final : final transaction occurs then bus waits for initiator to deassert IRDY.
@@ -27,11 +27,11 @@ always @(*) begin
             next_state = address;
         end
 
-        address: if (~devsel) begin
+        address: begin
             next_state = data_wait;
         end
 
-        data_wait: if (~(idry & trdy)) begin
+        data_wait: if (~idry & ~trdy & ~devsel) begin
             next_state = data;
         end
 
