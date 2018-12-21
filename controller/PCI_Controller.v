@@ -49,10 +49,9 @@ end
 
 always @(posedge clk)
 begin
-	if(force_request)
-	begin     
-       counter <= counter + 1; 
-   end
+	if(force_request) begin     
+       	counter <= counter + 1; 
+   	end
 	if(!gnt && frame && irdy && (previous_state == transaction || role == idle)) begin
 		role <= initiator;
 		state <= bus_granted;
@@ -84,8 +83,10 @@ begin
 	end
 end
 
-always @(negedge clk)
+always @(state,DPh)
 begin
+	@(negedge clk)
+	begin
 		if(role == initiator)
 		begin
 			case(state)
@@ -171,6 +172,7 @@ begin
 			endcase
 		end
 		previous_state <= state;
+	end
 end
 
 endmodule
