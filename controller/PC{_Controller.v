@@ -65,10 +65,10 @@ begin
 		counter <= 3'b000;
 	end
 	else if(!force_request && previous_state == transaction && DPh==3'b000) begin     
-      counter <= counter; 
+      		counter <= counter; 
 	end
 	else if(!force_request) begin     
-      counter <= counter + 3'b001; 
+      		counter <= counter + 3'b001; 
 	end
 	else if(previous_state == transaction && DPh==3'b000 && counter!=3'b000) begin
 		counter <= counter - 3'b001;
