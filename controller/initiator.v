@@ -1,20 +1,22 @@
 module Initiator_Controller(
     input [1:0]devaddress, input [3:0] BE, /*output [31:0]data,*/ input force_req, input rd_wr, //force_req active high
-    input clk, inout[31:0] AD, output[3:0] C_BE, input devsel, output reg frame, output reg irdy, input trdy,
+    input clk, inout[31:0] AD, output[3:0] C_BE, input devsel, output reg frame, output irdy, input trdy,
     input gnt, output req);
+
+
 reg[31:0] memory[0:7];
 
-wire wframe, wirdy;
+wire wframe, irdy;
 always @ (negedge clk) begin
     frame <= wframe;
-    irdy <= wirdy;
+    // irdy <= irdy;
     if (force_req) begin
         memory[7] <= devaddress;
     end
 end
 
 wire [2:0] state;
-State_Machine sm (wframe, wirdy, trdy, devsel, state, clk);
+State_Machine sm (wframe, irdy, trdy, devsel, state, clk);
 parameter[2:0]
 /* phases are four; 
 1. idle : bus is free.
@@ -36,11 +38,14 @@ always @ (posedge clk) begin
         counter <= counter - 1; 
     end
 end
+always @ (posedge force_req) begin
+    counter <= 0;
+end
 
 ////////////////////////////////////* send request to arbiter *////////////////////////////////////////////////
 reg bus_is_mine;    // indicate whether the bus is in this controller's command (active high)
-assign req = ((~force_req & counter) && (~bus_is_mine)) ? 0 : 1; // MUST REVIEW
-always @ (posedge clk) begin
+assign req = (((~force_req) && counter) && (~bus_is_mine)) ? 0 : 1; // MUST REVIEW
+always @ (negedge clk) begin
     if (force_req) begin
         bus_is_mine <= 0; 
     end
@@ -58,8 +63,8 @@ assign wframe = (bus_is_mine) ? ( (state == idle || counter > 1) ? 0 : 1) : 1'bz
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
 assign AD = (state == address) ? memory[7] : 32'hZZZZZZZZ;
 
-////////////////////////////////////////////* set wirdy *////////////////////////////////////////////////////
-assign wirdy = (state == data_wait || state == data) ? 0 : ( (state == final) ? 1 : 1'bz );
+////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
+assign irdy = (state == data_wait || state == data ||()) ? 0 : ( (state == final) ? 1 : 1'bz );
 
 ////////////////////////////////////////////* read data *////////////////////////////////////////////////////
  //for storing entry

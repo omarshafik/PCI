@@ -16,7 +16,7 @@ parameter[2:0]
 */
 idle=0, address=1, data_wait=2, data=3, final=4;
 
-always @(posedge clk) begin
+always @(negedge clk) begin
     state <= next_state;
 end
 
