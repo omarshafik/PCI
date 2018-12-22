@@ -1,11 +1,17 @@
 module Initiator_Controller(
-    input address[1:0], input BE[3:0], output data[31:0], input force_req, input rd_wr,
+    input address[1:0], input BE[3:0], output data[31:0], input force_req, input rd_wr, //force_req active high
     input clk, inout AD[31:0], output C_BE[3:0], input devsel, output frame, output irdy, input trdy,
     input gnt, output req;
 );
-
-reg[31:0] memory[7:0];  //for storing entry
-reg[2:0] mp;            //memmory pointer
+reg frame, irdy;
+wire wframe, wirdy;
+always @ (negedge clk) begin
+    frame <= wframe;
+    irdy <= wirdy;
+    if (force_req) begin
+        memory[7] <= address;
+    end
+end
 
 wire [2:0] state;
 State_Machine sm (frame, irdy, trdy, devsel, state, clk);
@@ -20,7 +26,7 @@ parameter[2:0]
 idle=0, address=1, data_wait=2, data=3, final=4;
 
 /*************************** count number of required transactions by master ******************************/
-/* frame must not get asserted before force_req signal gets deasserted */
+/* wframe must not get asserted before force_req signal gets deasserted */
 reg [1:0] counter;
 always @ (posedge clk) begin
     if(force_req && state == idle) begin     
@@ -32,25 +38,45 @@ always @ (posedge clk) begin
 end
 
 ////////////////////////////////////* send request to arbiter *////////////////////////////////////////////////
-assign req = ( ((~force_req & counter) && (gnt && state != idle)) ? 0 : 1; // MUST REVIEW
+reg bus_is_mine;    // indicate whether the bus is in this controller's command (active high)
+assign req = ((~force_req & counter) && (~bus_is_mine)) ? 0 : 1; // MUST REVIEW
+always @ (posedge clk) begin
+    if (force_req) begin
+        bus_is_mine <= 0; 
+    end
+    if (~gnt && state == idle && ~bus_is_mine) begin
+        bus_is_mine <= 1; 
+    end
+    if (bus_is_mine && state == final) begin
+        bus_is_mine <= 0; 
+    end
+end
 
-////////////////////////////////////////////* set frame *////////////////////////////////////////////////////
-assign frame = (~gnt && state == idle) ?  0 : ( (counter == 1 && state != idle) ? 1 : 1'bz );
+////////////////////////////////////////////* set wframe *////////////////////////////////////////////////////
+assign wframe = (bus_is_mine) ? ( (state == idle || counter > 1) ? 0 : 1) : 1'bz;
 
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
 assign AD = (state == address) ? memory[7] : 32'hZZZZZZZZ;
 
-////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
-assign irdy = (state == data_wait || state == data) ? 0 : ( (state == final) ? 1 : 1'bz );
+////////////////////////////////////////////* set wirdy *////////////////////////////////////////////////////
+assign wirdy = (state == data_wait || state == data) ? 0 : ( (state == final) ? 1 : 1'bz );
 
 ////////////////////////////////////////////* read data *////////////////////////////////////////////////////
+reg[31:0] memory[7:0];  //for storing entry
+reg[2:0] mp;            //memory pointer
+
 always @ (posedge clk) begin
     if (state == data || state == final) begin
         memory[mp] <= AD;
-        mp++; 
+        //mp++;   // illegal // unsynthesizable // accessing memory location mp while changing mp value
     end
     if (state == idle) begin
         mp <= 0; 
+    end
+end
+always @ (negedge clk) begin    // increment memory pointer
+    if (state == data || state == final) begin
+        mp <= mp + 1; 
     end
 end
 
