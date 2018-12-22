@@ -31,16 +31,17 @@ always @(*) begin
             next_state = data_wait;
         end
 
-        data_wait: if (~idry & ~trdy & ~devsel) begin
+        data_wait: if (~irdy & ~trdy & ~devsel) begin
             next_state = data;
         end
 
         data: if (frame & ~irdy & ~trdy) begin
             next_state = final;
         end
-        if (irdy | trdy) begin
+        else if (irdy || trdy) begin
             next_state = data_wait; 
         end
+
         final: if (irdy) begin
             next_state = idle;
         end
