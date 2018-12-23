@@ -5,20 +5,14 @@ module Initiator_Controller(
     input[2:0] state, input fcount, input fend_count, input freq_pending, input ffinished, input fvalid
     );
 
-
-
-
-// wire frame, irdy;
 always @ (negedge clk) begin
-    // frame <= frame;
-    // irdy <= irdy;
     if (force_req) begin
         memory[7] <= devaddress;
     end
 end
 
 parameter[2:0]
-idle=0, address=1, data_wait=2, data=3, final_data=4, finish=5;
+idle=0, address=1, turnaround=2, data=3, finish=4;
 
 /*************************** count number of required transactions by master ******************************/
 /* frame must not get asserted before force_req signal gets deasserted */
@@ -57,7 +51,7 @@ assign frame = (bus_is_mine && state != finish) ? ( (state == address || counter
 assign AD = (state == address && bus_is_mine) ? memory[7] : 32'hZZZZZZZZ;
 
 ////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
-assign irdy = (bus_is_mine && (state == data_wait || state == data)) ? 0 : ( (bus_is_mine && state == finish) ? 1 : 1'bz );
+assign irdy = (bus_is_mine && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine && state == finish) ? 1 : 1'bz );
 
 ////////////////////////////////////////////* read data *////////////////////////////////////////////////////
  //for storing entry
@@ -72,7 +66,6 @@ assign mem4 = memory[3];
 always @ (posedge clk) begin
     if (bus_is_mine && (state == data && fvalid)) begin
         memory[mp] <= AD;
-        //mp++;   // illegal // unsynthesizable // accessing memory location mp while changing mp value
     end
     if (state == idle) begin
         mp <= 0; 
@@ -84,5 +77,4 @@ always @ (negedge clk) begin    // increment memory pointer
     end
 end
 
-endmodule 
-
+endmodule   //master read module

@@ -1,5 +1,5 @@
 $date
-	Sun Dec 23 15:07:25 2018
+	Sun Dec 23 16:44:42 2018
 $end
 $version
 	Icarus Verilog
@@ -72,6 +72,7 @@ $var wire 1 + force_req $end
 $var wire 1 & frame $end
 $var wire 1 , gnt $end
 $var wire 1 % irdy $end
+$var wire 1 - rd_wr $end
 $var wire 1 $ req $end
 $var wire 1 # trdy $end
 $var wire 1 ' devsel $end
@@ -100,16 +101,16 @@ $enddefinitions $end
 #0
 $dumpvars
 bx J
-bx I
+b0 I
 bz H
-bx G
-bx F
+bz G
+b0 F
 b0 E
 xD
 bx C
 bx B
 xA
-bx @
+b0 @
 bx ?
 bx >
 bx =
@@ -117,48 +118,37 @@ bx <
 bx ;
 bz :
 bx 9
-bx 8
+bz 8
 x7
 x6
 x5
 x4
 x3
-bx 2
+b0 2
 bx 1
 bz 0
 bx /
-bx .
-x-
+bz .
+1-
 1,
 0+
 0*
 bx )
 bx (
-x'
+z'
 x&
-x%
+z%
 x$
-x#
-bx "
+z#
+bz "
 bz !
 $end
 #1
+b0 C
 1*
 #2
-z%
-z'
-z#
-bz "
-bz .
-bz 8
-bz G
-b0 2
-b0 @
-b0 F
-b0 I
 0*
 #3
-b0 C
 1*
 #4
 1$
@@ -226,7 +216,6 @@ b1 J
 1*
 #16
 0%
-0'
 bz "
 bz .
 bz 8
@@ -242,6 +231,7 @@ b10 I
 #17
 1*
 #18
+0'
 0#
 b10101010101010101010101010101010 "
 b10101010101010101010101010101010 .
@@ -265,7 +255,7 @@ b10101010101010101010101010101010 =
 1*
 #22
 b10 C
-b101 E
+b100 E
 1&
 b1 B
 0*
@@ -274,18 +264,18 @@ b10101010101010101010101010101010 >
 1*
 #24
 1%
-1'
-1#
+z'
+z#
 z&
 bz "
 bz .
 bz 8
 bz G
 b0 E
-b101 2
-b101 @
-b101 F
-b101 I
+b100 2
+b100 @
+b100 F
+b100 I
 b11 C
 b0 B
 0*
@@ -293,8 +283,6 @@ b0 B
 1*
 #26
 z%
-z'
-z#
 0A
 15
 b0 2

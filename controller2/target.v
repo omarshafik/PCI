@@ -12,8 +12,8 @@ always @ (posedge clk) begin
     end
 end
 
-assign devsel = (state == idle || state == address) ? 1'bz : ((state == finish) ? 1 : (add == devaddress) ? 0 : 1'bz);
+assign devsel = (state == data && add == devaddress) ? 0 : (state == finish) ? 1 : 1'bz;
 assign trdy = (state == data && add == devaddress) ? 0 : (state == finish) ? 1 : 1'bz;
 assign AD = (state == data && add == devaddress) ?  32'hAAAAAAAA: 32'hZZZZZZZZ;
 
-endmodule
+endmodule   //target read module

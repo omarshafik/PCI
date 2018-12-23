@@ -1,15 +1,36 @@
 module State_Machine(
-    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, fcount, fend_count, freq_pending, ffinished, fvalid
+    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, rd_wr, fcount, fend_count, freq_pending, ffinished, fvalid
 );
 
-input wire frame, irdy, trdy, devsel, clk, force_req, req, gnt;
+/*
+    This state machine is valid for both read and write transactions
+    for read: rd_wr = 1
+    for write: rd_wr = 0
+*/
+
+input wire frame, irdy, trdy, devsel, clk, force_req, req, gnt, rd_wr;
 output reg[2:0] state;
 reg[2:0] next_state;
 
 parameter[2:0] 
-idle=0, address=1, data_wait=2, data=3, final_data=4, finish=5;
+/*
+There are five states:
+1. idle: here the bus is free (with respect to the device)
+2. address: the initiator has asserted the frame and put a valid address on AD lines
+3. turnaround: in case of read transaction the target must wait for two cylces after the frame being asserted
+    to put valid data on AD and hence assert trdy
+4. data: here data tranfers may occur depending on irdy & trdy (fvalid flag)
+5. finish: all required transfers have occured and turnaround cycle ouccurs 
+*/
+idle=0, address=1, turnaround=2, data=3, finish=4;
 
-output reg fcount, fend_count, freq_pending, ffinished, fgnt, fvalid;
+output reg          //flags that contributes in synchronization of bus lines
+    fcount,         //indicates assertion of force_req signal
+    fend_count,     //indicates deassertion of force_req signal
+    freq_pending,   //indicates a pending req signal
+    ffinished,      //indicates finished transaction and free bus
+    fvalid;         //indicates that a valid data transfer may occur next positive edge of clock
+reg fgnt;           //indicates a granted bus ownership
 
 always @(negedge clk) begin
     state <= next_state;
@@ -48,10 +69,15 @@ always @(*) begin
         end
 
         address: if (!frame) begin
-            next_state = data_wait; 
+            if (rd_wr) begin
+                next_state = turnaround;               
+            end
+            else begin
+                next_state = data;
+            end
         end
 
-        data_wait: begin
+        turnaround: begin
             next_state = data;
         end
 

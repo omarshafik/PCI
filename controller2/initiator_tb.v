@@ -10,7 +10,7 @@ module test;
     initial begin
         $dumpfile("test.vcd");
         $dumpvars(0,test);
-        gnt = 1; force_req = 0;
+        gnt = 1; force_req = 0; rd_wr = 1;
         clk = 0;
         #4
         force_req = 1;

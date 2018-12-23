@@ -7,7 +7,7 @@ module Controller(
 wire[2:0] state;
 
 State_Machine sm(
-    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, fcount, fend_count, freq_pending, ffinished, fvalid
+    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, rd_wr, fcount, fend_count, freq_pending, ffinished, fvalid
 );
 
 Initiator_Controller ic(
