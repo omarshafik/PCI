@@ -1,11 +1,12 @@
 module arbiter(
-    req, grant,frame,clk,irdy, trdy, devsel
+    req, gnt,frame,clk,irdy, trdy, devsel
 );
+reg [3:0] wgnt;
 input frame,clk;
-
+input irdy , trdy, devsel;
 input[3:0] req;
 wire [2:0] state;
-output reg[3:0] grant;
+output reg[3:0] gnt;
 State_Machine sm (frame, irdy, trdy, devsel, state, clk);
 parameter[2:0] 
 /* phases are four; 
@@ -16,19 +17,28 @@ parameter[2:0]
 5. final : final transaction occurs then bus waits for initiator to deassert IRDY.
 */
 idle=0, address=1, data_wait=2, data=3, final=4;
-
 always @(posedge clk) begin
-    if (~req[0]&&frame&&(state== idle)) begin
-        grant <= 4'b1110;
-    end else if(~req[1]&&frame&&(state== idle)) begin
-        grant <= 4'b1101;
-    end else if(~req[2]&&frame&&(state== idle)) begin
-        grant <= 4'b1011;
-    end else if(~req[3]&&frame&&(state== idle)) begin
-        grant <= 4'b0111;
-    end else begin
-        grant <= 4'b1111;
-    end
+if((req==4'bxxx0)&&(state==idle||state==final))
+begin
+wgnt<=4'b1110;
 end
-
-endmodule // arbiter
+else if ((req==4'bxx01)&&(state==idle||state==final))
+begin
+wgnt<=4'b1101;
+end
+else if ((req==4'bx011)&&(state==idle||state==final))
+begin
+wgnt<=4'b1011;
+end
+else if ((req==4'b0111)&&(state==idle||state==final))
+begin
+gnt<=4'b0111;
+end
+else begin
+wgnt<=4'b1111;
+end
+end
+always @(negedge clk) begin
+gnt <=wgnt;
+end
+endmodule
