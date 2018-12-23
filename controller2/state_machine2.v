@@ -1,5 +1,5 @@
 module State_Machine(
-    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, fcount, fend_count, freq_pending, ffinished, fturnaround
+    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, fcount, fend_count, freq_pending, ffinished, fvalid
 );
 
 input wire frame, irdy, trdy, devsel, clk, force_req, req, gnt;
@@ -9,7 +9,7 @@ reg[2:0] next_state;
 parameter[2:0] 
 idle=0, address=1, data_wait=2, data=3, final_data=4, finish=5;
 
-output reg fcount, fend_count, freq_pending, ffinished, fgnt, fturnaround;
+output reg fcount, fend_count, freq_pending, ffinished, fgnt, fvalid;
 
 always @(negedge clk) begin
     state <= next_state;
@@ -38,9 +38,6 @@ always @(negedge clk) begin
     if (!gnt) begin
         fgnt <= 1; 
     end
-    if (state == data_wait) begin
-        fturnaround = ~fturnaround; 
-    end
 end
 
 always @(*) begin
@@ -52,28 +49,24 @@ always @(*) begin
 
         address: if (!frame) begin
             next_state = data_wait; 
-            fturnaround = 1'b0;
         end
 
-        data_wait: if (!frame && !irdy && !trdy) begin
+        data_wait: begin
             next_state = data;
         end
-        else if (frame && !irdy && !trdy) begin
+
+        data: begin
+        if (frame) begin
             next_state = finish; 
         end
-        
-        data: if (frame && !irdy && !trdy) begin
-            next_state = finish; 
-        end 
-        else if (!frame && (irdy || trdy)) begin
-            next_state = data_wait; 
+        if(!trdy && !irdy) begin
+            fvalid = 1; 
+        end else begin
+            fvalid = 0; 
+        end
         end
 
-        // final_data: if (!irdy && !trdy) begin
-        //     next_state = finish; 
-        // end
-
-        finish: next_state = idle;
+        finish: begin next_state = idle; end
 
         default: next_state = idle; //for initializing
     endcase

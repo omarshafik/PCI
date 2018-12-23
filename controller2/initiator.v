@@ -1,7 +1,9 @@
 module Initiator_Controller(
-    input [1:0]devaddress, input [3:0] BE, /*output [31:0]data,*/ input force_req, input rd_wr, //force_req active high
-    input clk, inout[31:0] AD, output[3:0] C_BE, input devsel, output frame, output irdy, input trdy,
-    input gnt, output req);
+    input [1:0]devaddress, input [3:0] BE, input force_req, input rd_wr, //force_req active high
+    input clk, inout[31:0] AD, output[3:0] C_BE, output frame, output irdy,
+    output req,
+    input[2:0] state, input fcount, input fend_count, input freq_pending, input ffinished, input fvalid
+    );
 
 
 
@@ -15,8 +17,6 @@ always @ (negedge clk) begin
     end
 end
 
-wire [2:0] state;
-State_Machine sm (frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, fcount, fend_count, freq_pending, ffinished);
 parameter[2:0]
 idle=0, address=1, data_wait=2, data=3, final_data=4, finish=5;
 
@@ -70,7 +70,7 @@ assign mem3 = memory[2];
 assign mem4 = memory[3];
 
 always @ (posedge clk) begin
-    if (bus_is_mine && (state == data)) begin
+    if (bus_is_mine && (state == data && fvalid)) begin
         memory[mp] <= AD;
         //mp++;   // illegal // unsynthesizable // accessing memory location mp while changing mp value
     end
@@ -79,7 +79,7 @@ always @ (posedge clk) begin
     end
 end
 always @ (negedge clk) begin    // increment memory pointer
-    if (bus_is_mine && (state == data)) begin
+    if (bus_is_mine && (state == data && fvalid)) begin
         mp <= mp + 1; 
     end
 end
