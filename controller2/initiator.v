@@ -21,7 +21,7 @@ always @ (negedge clk) begin
     if(fcount) begin     
         counter = counter + 1; 
     end
-    if (state == data) begin
+    if (state == data && fvalid) begin
         counter = counter - 1; 
     end
 end
@@ -48,7 +48,8 @@ end
 assign frame = (bus_is_mine && state != finish) ? ( (state == address || counter > 1) ? 0 : 1) : 1'bz;
 
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
-assign AD = (state == address && bus_is_mine) ? memory[7] : 32'hZZZZZZZZ;
+assign AD = (state == address && bus_is_mine) ? memory[7] : 32'hZZZZZZZZ;   // edit here for write command
+assign C_BE = (state == address && bus_is_mine) ? rd_wr : (state == data) ? BE : 4'bzzzz;
 
 ////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
 assign irdy = (bus_is_mine && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine && state == finish) ? 1 : 1'bz );
