@@ -1,5 +1,5 @@
 module State_Machine(
-    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid
+    frame, irdy, trdy, devsel, state, clk, force_req, burst, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid, fburst
 );
 
 /*
@@ -8,7 +8,7 @@ module State_Machine(
     for write: rd_wr = 0
 */
 
-input wire frame, irdy, trdy, devsel, clk, force_req, req, gnt, rd_wr;
+input wire frame, irdy, trdy, devsel, clk, force_req, burst, req, gnt, rd_wr;
 output reg[2:0] state;
 reg[2:0] next_state;
 
@@ -28,7 +28,8 @@ output reg          //flags that contributes in synchronization of bus lines
     fcount,         //indicates assertion of force_req signal
     fend_count,     //indicates deassertion of force_req signal
     ffinished,      //indicates finished transaction and free bus
-    fvalid;         //indicates that a valid data transfer may occur next positive edge of clock **combinational
+    fvalid,         //indicates that a valid data transfer may occur next positive edge of clock **combinational
+    fburst;
 reg fgnt;           //indicates a granted bus ownership
 
 always @(negedge clk) begin
@@ -51,6 +52,11 @@ always @(negedge clk) begin
         fgnt <= 1; 
     end else begin
         fgnt <= 0; 
+    end
+    if (burst) begin
+        fburst <= 1; 
+    end else begin
+        fburst <= 0; 
     end
 end
 
