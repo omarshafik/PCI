@@ -1,5 +1,5 @@
 module State_Machine(
-    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, rd_wr, fcount, fend_count, freq_pending, ffinished, fvalid
+    frame, irdy, trdy, devsel, state, clk, force_req, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid
 );
 
 /*
@@ -27,9 +27,8 @@ idle=0, address=1, turnaround=2, data=3, finish=4;
 output reg          //flags that contributes in synchronization of bus lines
     fcount,         //indicates assertion of force_req signal
     fend_count,     //indicates deassertion of force_req signal
-    freq_pending,   //indicates a pending req signal
     ffinished,      //indicates finished transaction and free bus
-    fvalid;         //indicates that a valid data transfer may occur next positive edge of clock
+    fvalid;         //indicates that a valid data transfer may occur next positive edge of clock **combinational
 reg fgnt;           //indicates a granted bus ownership
 
 always @(negedge clk) begin
@@ -40,40 +39,36 @@ always @(negedge clk) begin
     end
     if (!force_req && fcount) begin
         fcount <= 0;
-        fend_count <= 1; 
-    end
-    if (!req && gnt) begin
-        fgnt <= 0;
-        freq_pending <= 1; 
-    end
-    if (req) begin
-        freq_pending <= 0; 
+        fend_count <= 1;
     end
     if (state == address) begin
-        freq_pending <= 0;
         ffinished <= 0; 
     end
     if (state == finish) begin
-        ffinished <= 1; 
+        ffinished <= 1;
     end
     if (!gnt) begin
         fgnt <= 1; 
+    end else begin
+        fgnt <= 0; 
     end
 end
 
 always @(*) begin
     case (state)
 
-        idle: if (fgnt) begin
+        idle: if (fgnt && !req) begin
             next_state = address;
         end
 
-        address: if (!frame) begin
-            if (rd_wr) begin
-                next_state = turnaround;               
-            end
-            else begin
-                next_state = data;
+        address: begin
+            if (!frame) begin
+                if (rd_wr) begin
+                    next_state = turnaround;               
+                end
+                else begin
+                    next_state = data;
+                end
             end
         end
 
@@ -82,17 +77,22 @@ always @(*) begin
         end
 
         data: begin
-        if (frame) begin
-            next_state = finish; 
-        end
-        if(!trdy && !irdy) begin
-            fvalid = 1; 
-        end else begin
-            fvalid = 0; 
-        end
+            if(~fgnt) begin
+                next_state = finish; 
+            end
+            if (frame) begin
+                next_state = finish; 
+            end
+            if(!trdy && !irdy) begin
+                fvalid = 1; 
+            end else begin
+                fvalid = 0; 
+            end
         end
 
-        finish: begin next_state = idle; end
+        finish: begin 
+            next_state = idle; 
+        end
 
         default: next_state = idle; //for initializing
     endcase

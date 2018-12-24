@@ -1,5 +1,5 @@
 $date
-	Sun Dec 23 18:17:48 2018
+	Sun Dec 23 22:56:27 2018
 $end
 $version
 	Icarus Verilog
@@ -18,124 +18,128 @@ $var wire 4 ' C_BE [3:0] $end
 $var reg 4 ( BE [3:0] $end
 $var reg 2 ) address [1:0] $end
 $var reg 1 * clk $end
-$var reg 1 + force_req $end
-$var reg 1 , gnt $end
-$var reg 1 - rd_wr $end
+$var reg 32 + dat [31:0] $end
+$var reg 1 , force_req $end
+$var reg 1 - gnt $end
+$var reg 1 . rd_wr $end
 $scope module device $end
-$var wire 32 . AD [31:0] $end
-$var wire 4 / BE [3:0] $end
+$var wire 32 / AD [31:0] $end
+$var wire 4 0 BE [3:0] $end
 $var wire 1 * clk $end
-$var wire 2 0 devaddress [1:0] $end
-$var wire 1 + force_req $end
-$var wire 1 , gnt $end
-$var wire 1 - rd_wr $end
+$var wire 2 1 devaddress [1:0] $end
+$var wire 1 , force_req $end
+$var wire 1 - gnt $end
+$var wire 1 . rd_wr $end
+$var wire 32 2 write_data [31:0] $end
 $var wire 1 " trdy $end
-$var wire 3 1 state [2:0] $end
+$var wire 3 3 state [2:0] $end
 $var wire 1 # req $end
 $var wire 1 $ irdy $end
-$var wire 1 2 fvalid $end
-$var wire 1 3 freq_pending $end
+$var wire 1 4 fvalid $end
 $var wire 1 % frame $end
-$var wire 1 4 ffinished $end
-$var wire 1 5 fend_count $end
-$var wire 1 6 fcount $end
+$var wire 1 5 ffinished $end
+$var wire 1 6 fend_count $end
+$var wire 1 7 fcount $end
 $var wire 1 & devsel $end
-$var wire 4 7 C_BE [3:0] $end
+$var wire 4 8 C_BE [3:0] $end
 $scope module ic $end
-$var wire 32 8 AD [31:0] $end
-$var wire 4 9 BE [3:0] $end
+$var wire 32 9 AD [31:0] $end
+$var wire 4 : BE [3:0] $end
 $var wire 1 * clk $end
-$var wire 2 : devaddress [1:0] $end
-$var wire 1 + force_req $end
-$var wire 32 ; mem1 [31:0] $end
-$var wire 32 < mem2 [31:0] $end
-$var wire 32 = mem3 [31:0] $end
-$var wire 32 > mem4 [31:0] $end
-$var wire 1 - rd_wr $end
-$var wire 3 ? state [2:0] $end
+$var wire 2 ; devaddress [1:0] $end
+$var wire 1 , force_req $end
+$var wire 32 < mem1 [31:0] $end
+$var wire 32 = mem2 [31:0] $end
+$var wire 32 > mem3 [31:0] $end
+$var wire 32 ? mem4 [31:0] $end
+$var wire 1 . rd_wr $end
+$var wire 32 @ write_data [31:0] $end
+$var wire 3 A state [2:0] $end
 $var wire 1 # req $end
 $var wire 1 $ irdy $end
-$var wire 1 2 fvalid $end
-$var wire 1 3 freq_pending $end
+$var wire 1 4 fvalid $end
 $var wire 1 % frame $end
-$var wire 1 4 ffinished $end
-$var wire 1 5 fend_count $end
-$var wire 1 6 fcount $end
-$var wire 4 @ C_BE [3:0] $end
-$var reg 1 A bus_is_mine $end
-$var reg 2 B counter [1:0] $end
-$var reg 3 C mp [2:0] $end
+$var wire 1 5 ffinished $end
+$var wire 1 6 fend_count $end
+$var wire 1 7 fcount $end
+$var wire 4 B C_BE [3:0] $end
+$var reg 1 C bus_is_mine $end
+$var reg 4 D command [3:0] $end
+$var reg 2 E counter [1:0] $end
+$var reg 3 F mp [2:0] $end
 $upscope $end
 $scope module sm $end
 $var wire 1 * clk $end
-$var wire 1 + force_req $end
+$var wire 1 , force_req $end
 $var wire 1 % frame $end
-$var wire 1 , gnt $end
+$var wire 1 - gnt $end
 $var wire 1 $ irdy $end
-$var wire 1 - rd_wr $end
+$var wire 1 . rd_wr $end
 $var wire 1 # req $end
 $var wire 1 " trdy $end
 $var wire 1 & devsel $end
-$var reg 1 6 fcount $end
-$var reg 1 5 fend_count $end
-$var reg 1 4 ffinished $end
-$var reg 1 D fgnt $end
-$var reg 1 3 freq_pending $end
-$var reg 1 2 fvalid $end
-$var reg 3 E next_state [2:0] $end
-$var reg 3 F state [2:0] $end
+$var reg 1 7 fcount $end
+$var reg 1 6 fend_count $end
+$var reg 1 5 ffinished $end
+$var reg 1 G fgnt $end
+$var reg 1 4 fvalid $end
+$var reg 3 H next_state [2:0] $end
+$var reg 3 I state [2:0] $end
 $upscope $end
 $scope module tc $end
-$var wire 32 G AD [31:0] $end
-$var wire 4 H C_BE [3:0] $end
+$var wire 32 J AD [31:0] $end
+$var wire 4 K C_BE [3:0] $end
 $var wire 1 * clk $end
-$var wire 1 2 fvalid $end
-$var wire 3 I state [2:0] $end
+$var wire 1 4 fvalid $end
+$var wire 3 L state [2:0] $end
 $var wire 1 " trdy $end
 $var wire 1 & devsel $end
-$var reg 32 J add [31:0] $end
-$var reg 4 K command [3:0] $end
-$var reg 32 L memory [31:0] $end
+$var reg 32 M add [31:0] $end
+$var reg 4 N command [3:0] $end
+$var reg 32 O memory [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx L
-bx K
-bx J
+bx O
+bx N
+bx M
+b0 L
+bz K
+bz J
 b0 I
-bz H
-bz G
-b0 F
-b0 E
-xD
-bx C
-bx B
-xA
-bz @
-b0 ?
+b0 H
+0G
+bx F
+bx E
+bx D
+xC
+bz B
+b0 A
+bx @
+bx ?
 bx >
 bx =
 bx <
 bx ;
 bx :
-bx 9
+bz 9
 bz 8
-bz 7
+x7
 x6
 x5
 x4
-x3
-x2
-b0 1
+b0 3
+bx 2
+bx 1
 bx 0
-bx /
-bz .
+bz /
+1.
 1-
-1,
-0+
+0,
+bx +
 0*
 bx )
 bx (
@@ -148,100 +152,122 @@ z"
 bz !
 $end
 #1
-b0 C
 1*
 #2
 0*
 #3
 1*
 #4
-1#
 z%
-0A
-16
-05
-b0 B
+1#
+0C
+17
+06
+b0 E
 0*
+b1011 (
+b1011 0
+b1011 :
+b10111011101110111101111110111011 +
+b10111011101110111101111110111011 2
+b10111011101110111101111110111011 @
 b1 )
-b1 0
-b1 :
-1+
+b1 1
+b1 ;
+1,
 #5
+b10111011101110111101111110111011 <
+b1 D
+b0 F
 1*
 #6
-03
-b1 B
+b1 E
 0*
+b1 (
+b1 0
+b1 :
+b10101010101010101010101010101010 +
+b10101010101010101010101010101010 2
+b10101010101010101010101010101010 @
 #7
+b10101010101010101010101010101010 =
 1*
 #8
-b10 B
+b10 E
 0*
+b100 (
+b100 0
+b100 :
+b10111011101110111101111110111011 +
+b10111011101110111101111110111011 2
+b10111011101110111101111110111011 @
 #9
+b10111011101110111101111110111011 >
 1*
 #10
 0#
-15
-06
-b11 B
+16
+07
+b11 E
 0*
-bz )
+bz (
 bz 0
 bz :
-0+
+bz +
+bz 2
+bz @
+bz )
+bz 1
+bz ;
+0,
 #11
 1*
 #12
-b1 E
-1D
+b1 H
+1G
 0*
-0,
+0-
 #13
 1*
 #14
-b10 E
-1#
+b10 H
 0%
 b1 '
-b1 7
-b1 @
-b1 H
-b1 !
-b1 .
 b1 8
-b1 G
-1A
-13
-0D
-b1 1
-b1 ?
-b1 F
-b1 I
-0*
-1,
-#15
+b1 B
 b1 K
+b1 !
+b1 /
+b1 9
 b1 J
+1C
+b1 3
+b1 A
+b1 I
+b1 L
+0*
+#15
+b1 N
+b1 M
 1*
 #16
 1&
 1"
 0$
 bz '
-bz 7
-bz @
-bz H
-bz !
-bz .
 bz 8
-bz G
-b11 E
-04
-03
-b10 1
-b10 ?
-b10 F
+bz B
+bz K
+bz !
+bz /
+bz 9
+bz J
+b11 H
+05
+b10 3
+b10 A
 b10 I
+b10 L
 0*
 #17
 1*
@@ -249,58 +275,66 @@ b10 I
 0&
 0"
 b10101010101010101010101010101010 !
-b10101010101010101010101010101010 .
-b10101010101010101010101010101010 8
-b10101010101010101010101010101010 G
-bx '
-bx 7
-bx @
-bx H
-12
-b11 1
-b11 ?
-b11 F
+b10101010101010101010101010101010 /
+b10101010101010101010101010101010 9
+b10101010101010101010101010101010 J
+b1011 '
+b1011 8
+b1011 B
+b1011 K
+14
+b11 3
+b11 A
 b11 I
+b11 L
 0*
 #19
-b10101010101010101010101010101010 ;
-1*
-#20
-b1 C
-b10 B
-0*
-#21
 b10101010101010101010101010101010 <
 1*
-#22
-b10 C
-b100 E
-1%
+#20
+b1 '
+b1 8
 b1 B
+b1 K
+b1 F
+b10 E
+0*
+#21
+1*
+#22
+b100 '
+b100 8
+b100 B
+b100 K
+b10 F
+b100 H
+1#
+1%
+b1 E
 0*
 #23
-b10101010101010101010101010101010 =
+b10101010101010101010101010101010 >
 1*
 #24
 1$
 1&
 1"
 bz !
-bz .
-bz 8
-bz G
+bz /
+bz 9
+bz J
 z%
 bz '
-bz 7
-bz @
-bz H
-b0 E
-b100 1
-b100 ?
-b100 F
+bz 8
+bz B
+bz K
+b0 H
+b100 3
+b100 A
 b100 I
-b11 C
-b0 B
+b100 L
+b11 F
+b0 E
 0*
 #25
 1*
@@ -308,15 +342,15 @@ b0 B
 z&
 z"
 z$
-0A
-14
-b0 1
-b0 ?
-b0 F
+0C
+15
+b0 3
+b0 A
 b0 I
+b0 L
 0*
 #27
-b0 C
+b0 F
 1*
 #28
 0*
@@ -347,8 +381,4 @@ b0 C
 #41
 1*
 #42
-0*
-#43
-1*
-#44
 0*
