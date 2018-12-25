@@ -1,5 +1,5 @@
 $date
-	Mon Dec 24 21:35:11 2018
+	Tue Dec 25 16:39:47 2018
 $end
 $version
 	Icarus Verilog
@@ -171,9 +171,9 @@ bx (
 bz '
 z&
 z%
-x$
+1$
 z#
-x"
+z"
 bz !
 $end
 #1
@@ -183,8 +183,6 @@ $end
 #3
 1+
 #4
-1$
-z"
 0J
 1:
 09
@@ -359,14 +357,14 @@ bz W
 #30
 b11 Q
 0"
-b0 '
-b0 <
-b0 I
-b0 T
 b10 !
 b10 2
 b10 >
 b10 S
+b0 '
+b0 <
+b0 I
+b0 T
 1J
 08
 0+
@@ -456,14 +454,14 @@ bz W
 #46
 b11 Q
 0"
-b0 '
-b0 <
-b0 I
-b0 T
 b10 !
 b10 2
 b10 >
 b10 S
+b0 '
+b0 <
+b0 I
+b0 T
 1J
 08
 0+
@@ -559,14 +557,14 @@ bz W
 #64
 b11 Q
 0"
-b0 '
-b0 <
-b0 I
-b0 T
 b10 !
 b10 2
 b10 >
 b10 S
+b0 '
+b0 <
+b0 I
+b0 T
 1J
 08
 0+

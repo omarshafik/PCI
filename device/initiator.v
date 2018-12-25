@@ -46,6 +46,9 @@ always @ (negedge clk) begin
     if (state == data && !fvalid) begin
         failed_counter <= failed_counter + 1;
     end
+    if (state == data && fvalid) begin
+        failed_counter <= 0;
+    end
 end
 always @ (posedge force_req) begin
     counter <= 0;
@@ -54,7 +57,7 @@ end
 
 ////////////////////////////////////* send request to arbiter *////////////////////////////////////////////////
 reg bus_is_mine;    // indicate whether the bus is in this controller's command (active high)
-assign req = (fend_count && ((counter && (fburst || failed_counter < 4 || !bus_is_mine)) || counter > 1)) ? 0 : 1; // MUST REVIEW
+assign req = (fend_count === 1 && ((counter && (fburst || failed_counter < 4 || !bus_is_mine)) || counter > 1)) ? 0 : 1; // MUST REVIEW
 always @ (*) begin
     if (fcount) begin
         bus_is_mine = 0; 
@@ -68,14 +71,14 @@ always @ (*) begin
 end
 
 ////////////////////////////////////////////* set frame *////////////////////////////////////////////////////
-assign frame = (bus_is_mine && state != finish && counter) ? ( (state == address || fburst || failed_counter < 4) ? 0 : 1) : 1'bz;  //multi transactions 
+assign frame = (bus_is_mine === 1 && state != finish && counter) ? ( (state == address || fburst || failed_counter < 4) ? 0 : 1) : 1'bz;  //multi transactions 
 
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
-assign AD = (state == address && bus_is_mine) ? memory[9 - max + counter] : (command == 0 && state == data) ? write_data : 32'hZZZZZZZZ;
-assign C_BE = (state == address && bus_is_mine) ? command : (state == data) ? BE : 4'bzzzz;
+assign AD = (state == address && bus_is_mine === 1) ? memory[9 - max + counter] : (command === 0 && state === data) ? write_data : 32'hZZZZZZZZ;
+assign C_BE = (state == address && bus_is_mine === 1) ? command : (state === data) ? BE : 4'bzzzz;
 
 ////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
-assign irdy = (bus_is_mine && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine && state == finish) ? 1 : 1'bz );
+assign irdy = (bus_is_mine === 1 && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine === 1 && state == finish) ? 1 : 1'bz );
 
 ////////////////////////////////////////////* read data *////////////////////////////////////////////////////
                             /* read data is saved in this internal memory */
