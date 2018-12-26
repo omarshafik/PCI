@@ -1,5 +1,5 @@
 $date
-	Thu Dec 27 00:51:16 2018
+	Thu Dec 27 01:41:57 2018
 $end
 $version
 	Icarus Verilog
@@ -14,328 +14,498 @@ $var wire 1 # devsel $end
 $var wire 1 $ frame $end
 $var wire 1 % irdy $end
 $var wire 1 & trdy $end
-$var wire 1 ' reqB $end
-$var wire 1 ( reqA $end
-$var reg 4 ) BE_A [3:0] $end
-$var reg 4 * BE_B [3:0] $end
-$var reg 2 + addressA [1:0] $end
-$var reg 2 , addressB [1:0] $end
-$var reg 1 - burstA $end
-$var reg 1 . burstB $end
-$var reg 1 / clk $end
-$var reg 32 0 datA [31:0] $end
-$var reg 32 1 datB [31:0] $end
-$var reg 1 2 force_reqA $end
-$var reg 1 3 force_reqB $end
-$var reg 1 4 gntA $end
-$var reg 1 5 gntB $end
-$var reg 1 6 rd_wrA $end
-$var reg 1 7 rd_wrB $end
-$var reg 1 8 reset_add $end
-$var reg 1 9 rframe $end
+$var wire 1 ' reqC $end
+$var wire 1 ( reqB $end
+$var wire 1 ) reqA $end
+$var wire 4 * req [3:0] $end
+$var wire 1 + gntC $end
+$var wire 1 , gntB $end
+$var wire 1 - gntA $end
+$var wire 4 . gnt [3:0] $end
+$var reg 4 / BE_A [3:0] $end
+$var reg 4 0 BE_B [3:0] $end
+$var reg 4 1 BE_C [3:0] $end
+$var reg 2 2 addressA [1:0] $end
+$var reg 2 3 addressB [1:0] $end
+$var reg 2 4 addressC [1:0] $end
+$var reg 1 5 burstA $end
+$var reg 1 6 burstB $end
+$var reg 1 7 burstC $end
+$var reg 1 8 clk $end
+$var reg 32 9 datA [31:0] $end
+$var reg 32 : datB [31:0] $end
+$var reg 32 ; datC [31:0] $end
+$var reg 1 < force_reqA $end
+$var reg 1 = force_reqB $end
+$var reg 1 > force_reqC $end
+$var reg 1 ? rd_wrA $end
+$var reg 1 @ rd_wrB $end
+$var reg 1 A rd_wrC $end
+$var reg 1 B reset_add $end
+$var reg 1 C rframe $end
+$scope module arbit $end
+$var wire 1 8 clk $end
+$var wire 4 D req [3:0] $end
+$var reg 4 E gnt [3:0] $end
+$var reg 4 F wgnt [3:0] $end
+$upscope $end
 $scope module deviceA $end
-$var wire 32 : AD [31:0] $end
-$var wire 4 ; BE [3:0] $end
-$var wire 4 < C_BE [3:0] $end
-$var wire 1 - burst $end
-$var wire 1 / clk $end
-$var wire 2 = devaddress [1:0] $end
-$var wire 1 # devsel $end
-$var wire 1 2 force_req $end
-$var wire 1 $ frame $end
-$var wire 1 4 gnt $end
-$var wire 1 % irdy $end
-$var wire 1 6 rd_wr $end
-$var wire 1 8 reset_address $end
-$var wire 1 & trdy $end
-$var wire 32 > write_data [31:0] $end
-$var wire 3 ? state [2:0] $end
-$var wire 1 ( req $end
-$var wire 1 @ fvalid $end
-$var wire 1 A ffinished $end
-$var wire 1 B fend_count $end
-$var wire 1 C fcount $end
-$var wire 1 D fburst $end
-$var wire 1 E bus_is_mine $end
-$var reg 2 F tar_add [1:0] $end
-$scope module ic $end
 $var wire 32 G AD [31:0] $end
 $var wire 4 H BE [3:0] $end
 $var wire 4 I C_BE [3:0] $end
-$var wire 1 / clk $end
-$var wire 4 J comm [3:0] $end
-$var wire 2 K devaddress [1:0] $end
-$var wire 1 2 force_req $end
+$var wire 1 5 burst $end
+$var wire 1 8 clk $end
+$var wire 2 J devaddress [1:0] $end
+$var wire 1 # devsel $end
+$var wire 1 < force_req $end
+$var wire 1 $ frame $end
+$var wire 1 - gnt $end
+$var wire 1 % irdy $end
+$var wire 1 ? rd_wr $end
+$var wire 1 B reset_address $end
+$var wire 1 & trdy $end
+$var wire 32 K write_data [31:0] $end
+$var wire 3 L state [2:0] $end
+$var wire 1 ) req $end
+$var wire 1 M fvalid $end
+$var wire 1 N ffinished $end
+$var wire 1 O fend_count $end
+$var wire 1 P fcount $end
+$var wire 1 Q fburst $end
+$var wire 1 R bus_is_mine $end
+$var reg 2 S tar_add [1:0] $end
+$scope module ic $end
+$var wire 32 T AD [31:0] $end
+$var wire 4 U BE [3:0] $end
+$var wire 4 V C_BE [3:0] $end
+$var wire 1 8 clk $end
+$var wire 4 W comm [3:0] $end
+$var wire 2 X devaddress [1:0] $end
+$var wire 1 < force_req $end
 $var wire 1 $ frame $end
 $var wire 1 % irdy $end
-$var wire 32 L mem1 [31:0] $end
-$var wire 32 M mem10 [31:0] $end
-$var wire 32 N mem2 [31:0] $end
-$var wire 32 O mem3 [31:0] $end
-$var wire 32 P mem4 [31:0] $end
-$var wire 32 Q mem9 [31:0] $end
-$var wire 1 6 rd_wr $end
-$var wire 32 R write_data [31:0] $end
-$var wire 3 S state [2:0] $end
-$var wire 1 ( req $end
-$var wire 1 @ fvalid $end
-$var wire 1 A ffinished $end
-$var wire 1 B fend_count $end
-$var wire 1 C fcount $end
-$var wire 1 D fburst $end
-$var wire 1 E bus_is_mine $end
-$var reg 2 T counter [1:0] $end
-$var reg 3 U failed_counter [2:0] $end
-$var reg 2 V max [1:0] $end
-$var reg 3 W mp [2:0] $end
+$var wire 32 Y mem1 [31:0] $end
+$var wire 32 Z mem10 [31:0] $end
+$var wire 32 [ mem2 [31:0] $end
+$var wire 32 \ mem3 [31:0] $end
+$var wire 32 ] mem4 [31:0] $end
+$var wire 32 ^ mem9 [31:0] $end
+$var wire 1 ? rd_wr $end
+$var wire 32 _ write_data [31:0] $end
+$var wire 3 ` state [2:0] $end
+$var wire 1 ) req $end
+$var wire 1 M fvalid $end
+$var wire 1 N ffinished $end
+$var wire 1 O fend_count $end
+$var wire 1 P fcount $end
+$var wire 1 Q fburst $end
+$var wire 1 R bus_is_mine $end
+$var reg 2 a counter [1:0] $end
+$var reg 3 b failed_counter [2:0] $end
+$var reg 2 c max [1:0] $end
+$var reg 3 d mp [2:0] $end
 $upscope $end
 $scope module sm $end
-$var wire 1 - burst $end
-$var wire 1 / clk $end
+$var wire 1 5 burst $end
+$var wire 1 8 clk $end
 $var wire 1 # devsel $end
-$var wire 1 2 force_req $end
+$var wire 1 < force_req $end
 $var wire 1 $ frame $end
-$var wire 1 4 gnt $end
+$var wire 1 - gnt $end
 $var wire 1 % irdy $end
-$var wire 1 X rd_wr $end
-$var wire 1 ( req $end
+$var wire 1 e rd_wr $end
+$var wire 1 ) req $end
 $var wire 1 & trdy $end
-$var reg 1 E bus_is_mine $end
-$var reg 1 D fburst $end
-$var reg 1 C fcount $end
-$var reg 1 B fend_count $end
-$var reg 1 A ffinished $end
-$var reg 1 Y fgnt $end
-$var reg 1 @ fvalid $end
-$var reg 3 Z next_state [2:0] $end
-$var reg 3 [ state [2:0] $end
+$var reg 1 R bus_is_mine $end
+$var reg 1 Q fburst $end
+$var reg 1 P fcount $end
+$var reg 1 O fend_count $end
+$var reg 1 N ffinished $end
+$var reg 1 f fgnt $end
+$var reg 1 M fvalid $end
+$var reg 3 g next_state [2:0] $end
+$var reg 3 h state [2:0] $end
 $upscope $end
 $scope module tc $end
-$var wire 32 \ AD [31:0] $end
-$var wire 4 ] C_BE [3:0] $end
-$var wire 1 / clk $end
+$var wire 32 i AD [31:0] $end
+$var wire 4 j C_BE [3:0] $end
+$var wire 1 8 clk $end
 $var wire 1 # devsel $end
 $var wire 1 $ frame $end
-$var wire 1 @ fvalid $end
-$var wire 32 ^ mem1 [31:0] $end
-$var wire 32 _ mem2 [31:0] $end
-$var wire 32 ` mem3 [31:0] $end
-$var wire 32 a mem4 [31:0] $end
-$var wire 3 b state [2:0] $end
-$var wire 2 c tar_address [1:0] $end
+$var wire 1 M fvalid $end
+$var wire 32 k mem1 [31:0] $end
+$var wire 32 l mem2 [31:0] $end
+$var wire 32 m mem3 [31:0] $end
+$var wire 32 n mem4 [31:0] $end
+$var wire 3 o state [2:0] $end
+$var wire 2 p tar_address [1:0] $end
 $var wire 1 & trdy $end
-$var reg 32 d add [31:0] $end
-$var reg 4 e command [3:0] $end
-$var reg 4 f mp [3:0] $end
+$var reg 32 q add [31:0] $end
+$var reg 4 r command [3:0] $end
+$var reg 4 s mp [3:0] $end
 $upscope $end
 $upscope $end
 $scope module deviceB $end
-$var wire 32 g AD [31:0] $end
-$var wire 4 h BE [3:0] $end
-$var wire 4 i C_BE [3:0] $end
-$var wire 1 . burst $end
-$var wire 1 / clk $end
-$var wire 2 j devaddress [1:0] $end
-$var wire 1 # devsel $end
-$var wire 1 3 force_req $end
-$var wire 1 $ frame $end
-$var wire 1 5 gnt $end
-$var wire 1 % irdy $end
-$var wire 1 7 rd_wr $end
-$var wire 1 8 reset_address $end
-$var wire 1 & trdy $end
-$var wire 32 k write_data [31:0] $end
-$var wire 3 l state [2:0] $end
-$var wire 1 ' req $end
-$var wire 1 m fvalid $end
-$var wire 1 n ffinished $end
-$var wire 1 o fend_count $end
-$var wire 1 p fcount $end
-$var wire 1 q fburst $end
-$var wire 1 r bus_is_mine $end
-$var reg 2 s tar_add [1:0] $end
-$scope module ic $end
 $var wire 32 t AD [31:0] $end
 $var wire 4 u BE [3:0] $end
 $var wire 4 v C_BE [3:0] $end
-$var wire 1 / clk $end
-$var wire 4 w comm [3:0] $end
-$var wire 2 x devaddress [1:0] $end
-$var wire 1 3 force_req $end
+$var wire 1 6 burst $end
+$var wire 1 8 clk $end
+$var wire 2 w devaddress [1:0] $end
+$var wire 1 # devsel $end
+$var wire 1 = force_req $end
+$var wire 1 $ frame $end
+$var wire 1 , gnt $end
+$var wire 1 % irdy $end
+$var wire 1 @ rd_wr $end
+$var wire 1 B reset_address $end
+$var wire 1 & trdy $end
+$var wire 32 x write_data [31:0] $end
+$var wire 3 y state [2:0] $end
+$var wire 1 ( req $end
+$var wire 1 z fvalid $end
+$var wire 1 { ffinished $end
+$var wire 1 | fend_count $end
+$var wire 1 } fcount $end
+$var wire 1 ~ fburst $end
+$var wire 1 !" bus_is_mine $end
+$var reg 2 "" tar_add [1:0] $end
+$scope module ic $end
+$var wire 32 #" AD [31:0] $end
+$var wire 4 $" BE [3:0] $end
+$var wire 4 %" C_BE [3:0] $end
+$var wire 1 8 clk $end
+$var wire 4 &" comm [3:0] $end
+$var wire 2 '" devaddress [1:0] $end
+$var wire 1 = force_req $end
 $var wire 1 $ frame $end
 $var wire 1 % irdy $end
-$var wire 32 y mem1 [31:0] $end
-$var wire 32 z mem10 [31:0] $end
-$var wire 32 { mem2 [31:0] $end
-$var wire 32 | mem3 [31:0] $end
-$var wire 32 } mem4 [31:0] $end
-$var wire 32 ~ mem9 [31:0] $end
-$var wire 1 7 rd_wr $end
-$var wire 32 !" write_data [31:0] $end
-$var wire 3 "" state [2:0] $end
-$var wire 1 ' req $end
-$var wire 1 m fvalid $end
-$var wire 1 n ffinished $end
-$var wire 1 o fend_count $end
-$var wire 1 p fcount $end
-$var wire 1 q fburst $end
-$var wire 1 r bus_is_mine $end
-$var reg 2 #" counter [1:0] $end
-$var reg 3 $" failed_counter [2:0] $end
-$var reg 2 %" max [1:0] $end
-$var reg 3 &" mp [2:0] $end
+$var wire 32 (" mem1 [31:0] $end
+$var wire 32 )" mem10 [31:0] $end
+$var wire 32 *" mem2 [31:0] $end
+$var wire 32 +" mem3 [31:0] $end
+$var wire 32 ," mem4 [31:0] $end
+$var wire 32 -" mem9 [31:0] $end
+$var wire 1 @ rd_wr $end
+$var wire 32 ." write_data [31:0] $end
+$var wire 3 /" state [2:0] $end
+$var wire 1 ( req $end
+$var wire 1 z fvalid $end
+$var wire 1 { ffinished $end
+$var wire 1 | fend_count $end
+$var wire 1 } fcount $end
+$var wire 1 ~ fburst $end
+$var wire 1 !" bus_is_mine $end
+$var reg 2 0" counter [1:0] $end
+$var reg 3 1" failed_counter [2:0] $end
+$var reg 2 2" max [1:0] $end
+$var reg 3 3" mp [2:0] $end
 $upscope $end
 $scope module sm $end
-$var wire 1 . burst $end
-$var wire 1 / clk $end
+$var wire 1 6 burst $end
+$var wire 1 8 clk $end
 $var wire 1 # devsel $end
-$var wire 1 3 force_req $end
+$var wire 1 = force_req $end
 $var wire 1 $ frame $end
-$var wire 1 5 gnt $end
+$var wire 1 , gnt $end
 $var wire 1 % irdy $end
-$var wire 1 '" rd_wr $end
-$var wire 1 ' req $end
+$var wire 1 4" rd_wr $end
+$var wire 1 ( req $end
 $var wire 1 & trdy $end
-$var reg 1 r bus_is_mine $end
-$var reg 1 q fburst $end
-$var reg 1 p fcount $end
-$var reg 1 o fend_count $end
-$var reg 1 n ffinished $end
-$var reg 1 (" fgnt $end
-$var reg 1 m fvalid $end
-$var reg 3 )" next_state [2:0] $end
-$var reg 3 *" state [2:0] $end
+$var reg 1 !" bus_is_mine $end
+$var reg 1 ~ fburst $end
+$var reg 1 } fcount $end
+$var reg 1 | fend_count $end
+$var reg 1 { ffinished $end
+$var reg 1 5" fgnt $end
+$var reg 1 z fvalid $end
+$var reg 3 6" next_state [2:0] $end
+$var reg 3 7" state [2:0] $end
 $upscope $end
 $scope module tc $end
-$var wire 32 +" AD [31:0] $end
-$var wire 4 ," C_BE [3:0] $end
-$var wire 1 / clk $end
+$var wire 32 8" AD [31:0] $end
+$var wire 4 9" C_BE [3:0] $end
+$var wire 1 8 clk $end
 $var wire 1 # devsel $end
 $var wire 1 $ frame $end
-$var wire 1 m fvalid $end
-$var wire 32 -" mem1 [31:0] $end
-$var wire 32 ." mem2 [31:0] $end
-$var wire 32 /" mem3 [31:0] $end
-$var wire 32 0" mem4 [31:0] $end
-$var wire 3 1" state [2:0] $end
-$var wire 2 2" tar_address [1:0] $end
+$var wire 1 z fvalid $end
+$var wire 32 :" mem1 [31:0] $end
+$var wire 32 ;" mem2 [31:0] $end
+$var wire 32 <" mem3 [31:0] $end
+$var wire 32 =" mem4 [31:0] $end
+$var wire 3 >" state [2:0] $end
+$var wire 2 ?" tar_address [1:0] $end
 $var wire 1 & trdy $end
-$var reg 32 3" add [31:0] $end
-$var reg 4 4" command [3:0] $end
-$var reg 4 5" mp [3:0] $end
+$var reg 32 @" add [31:0] $end
+$var reg 4 A" command [3:0] $end
+$var reg 4 B" mp [3:0] $end
+$upscope $end
+$upscope $end
+$scope module deviceC $end
+$var wire 32 C" AD [31:0] $end
+$var wire 4 D" BE [3:0] $end
+$var wire 4 E" C_BE [3:0] $end
+$var wire 1 7 burst $end
+$var wire 1 8 clk $end
+$var wire 2 F" devaddress [1:0] $end
+$var wire 1 # devsel $end
+$var wire 1 > force_req $end
+$var wire 1 $ frame $end
+$var wire 1 + gnt $end
+$var wire 1 % irdy $end
+$var wire 1 A rd_wr $end
+$var wire 1 B reset_address $end
+$var wire 1 & trdy $end
+$var wire 32 G" write_data [31:0] $end
+$var wire 3 H" state [2:0] $end
+$var wire 1 ' req $end
+$var wire 1 I" fvalid $end
+$var wire 1 J" ffinished $end
+$var wire 1 K" fend_count $end
+$var wire 1 L" fcount $end
+$var wire 1 M" fburst $end
+$var wire 1 N" bus_is_mine $end
+$var reg 2 O" tar_add [1:0] $end
+$scope module ic $end
+$var wire 32 P" AD [31:0] $end
+$var wire 4 Q" BE [3:0] $end
+$var wire 4 R" C_BE [3:0] $end
+$var wire 1 8 clk $end
+$var wire 4 S" comm [3:0] $end
+$var wire 2 T" devaddress [1:0] $end
+$var wire 1 > force_req $end
+$var wire 1 $ frame $end
+$var wire 1 % irdy $end
+$var wire 32 U" mem1 [31:0] $end
+$var wire 32 V" mem10 [31:0] $end
+$var wire 32 W" mem2 [31:0] $end
+$var wire 32 X" mem3 [31:0] $end
+$var wire 32 Y" mem4 [31:0] $end
+$var wire 32 Z" mem9 [31:0] $end
+$var wire 1 A rd_wr $end
+$var wire 32 [" write_data [31:0] $end
+$var wire 3 \" state [2:0] $end
+$var wire 1 ' req $end
+$var wire 1 I" fvalid $end
+$var wire 1 J" ffinished $end
+$var wire 1 K" fend_count $end
+$var wire 1 L" fcount $end
+$var wire 1 M" fburst $end
+$var wire 1 N" bus_is_mine $end
+$var reg 2 ]" counter [1:0] $end
+$var reg 3 ^" failed_counter [2:0] $end
+$var reg 2 _" max [1:0] $end
+$var reg 3 `" mp [2:0] $end
+$upscope $end
+$scope module sm $end
+$var wire 1 7 burst $end
+$var wire 1 8 clk $end
+$var wire 1 # devsel $end
+$var wire 1 > force_req $end
+$var wire 1 $ frame $end
+$var wire 1 + gnt $end
+$var wire 1 % irdy $end
+$var wire 1 a" rd_wr $end
+$var wire 1 ' req $end
+$var wire 1 & trdy $end
+$var reg 1 N" bus_is_mine $end
+$var reg 1 M" fburst $end
+$var reg 1 L" fcount $end
+$var reg 1 K" fend_count $end
+$var reg 1 J" ffinished $end
+$var reg 1 b" fgnt $end
+$var reg 1 I" fvalid $end
+$var reg 3 c" next_state [2:0] $end
+$var reg 3 d" state [2:0] $end
+$upscope $end
+$scope module tc $end
+$var wire 32 e" AD [31:0] $end
+$var wire 4 f" C_BE [3:0] $end
+$var wire 1 8 clk $end
+$var wire 1 # devsel $end
+$var wire 1 $ frame $end
+$var wire 1 I" fvalid $end
+$var wire 32 g" mem1 [31:0] $end
+$var wire 32 h" mem2 [31:0] $end
+$var wire 32 i" mem3 [31:0] $end
+$var wire 32 j" mem4 [31:0] $end
+$var wire 3 k" state [2:0] $end
+$var wire 2 l" tar_address [1:0] $end
+$var wire 1 & trdy $end
+$var reg 32 m" add [31:0] $end
+$var reg 4 n" command [3:0] $end
+$var reg 4 o" mp [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx 5"
-bx 4"
+bx o"
+bx n"
+bx m"
+b10 l"
+bx k"
+bx j"
+bx i"
+bx h"
+bx g"
+bz f"
+bz e"
+bx d"
+bx c"
+0b"
+za"
+bx `"
+bx _"
+bx ^"
+bx ]"
+bx \"
+bx ["
+bx Z"
+bx Y"
+bx X"
+bx W"
+bx V"
+bx U"
+b10 T"
+bx S"
+bz R"
+bx Q"
+bz P"
+b10 O"
+xN"
+0M"
+xL"
+xK"
+xJ"
+xI"
+bx H"
+bx G"
+b10 F"
+bz E"
+bx D"
+bz C"
+bx B"
+bx A"
+bx @"
+b1 ?"
+bx >"
+bx ="
+bx <"
+bx ;"
+bx :"
+bz 9"
+bz 8"
+bx 7"
+bx 6"
+05"
+z4"
 bx 3"
-b0 2"
+bx 2"
 bx 1"
 bx 0"
 bx /"
 bx ."
 bx -"
-bz ,"
-bz +"
+bx ,"
+bx +"
 bx *"
 bx )"
-0("
-z'"
+bx ("
+b1 '"
 bx &"
-bx %"
+bz %"
 bx $"
-bx #"
-bx ""
-bx !"
-bx ~
-bx }
-bx |
-bx {
-bx z
+bz #"
+b1 ""
+x!"
+0~
+x}
+x|
+x{
+xz
 bx y
-b0 x
-bx w
+bx x
+b1 w
 bz v
 bx u
 bz t
-b0 s
-xr
-0q
-xp
-xo
-xn
-xm
+bx s
+bx r
+bx q
+b0 p
+bx o
+bx n
+bx m
 bx l
 bx k
-b0 j
+bz j
 bz i
 bx h
-bz g
-bx f
-bx e
+bx g
+0f
+ze
 bx d
-b1 c
+bx c
 bx b
 bx a
 bx `
 bx _
 bx ^
-bz ]
-bz \
+bx ]
+bx \
 bx [
 bx Z
-0Y
-zX
+bx Y
+b0 X
 bx W
-bx V
+bz V
 bx U
-bx T
-bx S
-bx R
-bx Q
-bx P
-bx O
-bx N
-bx M
+bz T
+b0 S
+xR
+0Q
+xP
+xO
+xN
+xM
 bx L
-b1 K
-bx J
+bx K
+b0 J
 bz I
 bx H
 bz G
-b1 F
-xE
-0D
-xC
-xB
+bx F
+bx E
+b111 D
+zC
+1B
 xA
-x@
-bx ?
-bx >
-b1 =
-bz <
+0@
+0?
+x>
+0=
+0<
 bx ;
-bz :
-z9
-18
+bx :
+bx 9
+08
 07
 06
-15
-14
-03
-02
+05
+b10 4
+b1 3
+b0 2
 bx 1
 bx 0
-0/
-0.
-0-
-b0 ,
-b1 +
-bx *
-bx )
+bx /
+bx .
+x-
+x,
+x+
+b111 *
+1)
 1(
 1'
 z&
@@ -346,435 +516,1092 @@ bz "
 bz !
 $end
 #1
-b0 W
-b0 V
-b0 T
-b0 Z
-b0 )"
-1/
-b0 +
-b0 =
-b0 K
-12
-08
-#2
-b0 l
-b0 ""
-b0 *"
-b0 1"
-1C
+b111 F
+b0 d
+b0 c
+b0 a
+b0 g
+b0 6"
+b0 c"
+18
+b1 2
+b1 J
+b1 X
+1<
 0B
-b0 ?
-b0 S
-b0 [
-b0 b
-0/
-#3
-b0 J
-b0 M
-0r
-1m
-0E
-1@
-1/
-b1011 )
-b1011 ;
-b1011 H
-b10101010101010101010101010101010 0
-b10101010101010101010101010101010 >
-b10101010101010101010101010101010 R
+#2
+1+
+1,
 1-
-04
-02
-#4
-0(
-1D
-1Y
-1B
-0C
-b0 U
-b1 V
-b1 T
-b1 W
-0/
-#5
-1$
-1E
+b111 .
+b111 E
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b0 y
+b0 /"
+b0 7"
+b0 >"
+1P
+0O
+b0 L
+b0 `
+b0 h
+b0 o
+08
+#3
+b0 W
 b1 Z
-1/
+0N"
+1I"
+0!"
+1z
+0R
+1M
+18
+b1111 /
+b1111 H
+b1111 U
+b10101010101010101010101010101010 9
+b10101010101010101010101010101010 K
+b10101010101010101010101010101010 _
+15
+0<
+#4
+b11 *
+b11 D
+0)
+1Q
+1O
+0P
+b0 b
+b1 c
+b1 a
+b1 d
+08
+#5
+b1011 F
+18
 #6
+0-
+b1011 .
+b1011 E
+08
+#7
+18
+#8
+1f
+08
+#9
+1$
+1R
+b1 g
+18
+#10
 1%
 0$
-0X
-0'"
+0e
+04"
+0a"
 b0 !
-b0 <
 b0 I
-b0 ]
-b0 i
+b0 V
+b0 j
 b0 v
-b0 ,"
-b0 "
-b0 :
-b0 G
-b0 \
-b0 g
-b0 t
-b0 +"
-b1 ?
-b1 S
-b1 [
-b1 b
-0/
-#7
+b0 %"
+b0 9"
+b0 E"
+b0 R"
+b0 f"
+b1 "
+b1 G
+b1 T
+b1 i
+b1 t
+b1 #"
+b1 8"
+b1 C"
+b1 P"
+b1 e"
+b1 L
+b1 `
+b1 h
+b1 o
+08
+#11
 1#
 1&
-b0 5"
-b0 4"
-b0 3"
-b11 )"
-b11 Z
-1/
-#8
+b0 o"
+b0 n"
+b1 m"
+b0 B"
+b0 A"
+b1 @"
+b11 c"
+b11 6"
+b11 g
+18
+#12
 0%
 0$
-1X
-1'"
+1e
+14"
+1a"
 0#
 0&
-b1011 !
-b1011 <
-b1011 I
-b1011 ]
-b1011 i
-b1011 v
-b1011 ,"
+b1111 !
+b1111 I
+b1111 V
+b1111 j
+b1111 v
+b1111 %"
+b1111 9"
+b1111 E"
+b1111 R"
+b1111 f"
 b10101010101010101010101010101010 "
-b10101010101010101010101010101010 :
 b10101010101010101010101010101010 G
-b10101010101010101010101010101010 \
-b10101010101010101010101010101010 g
+b10101010101010101010101010101010 T
+b10101010101010101010101010101010 i
 b10101010101010101010101010101010 t
-b10101010101010101010101010101010 +"
-0A
-b11 ?
-b11 S
-b11 [
-b11 b
-b0 W
-b11 l
-b11 ""
-b11 *"
-b11 1"
-0/
-#9
-b10101010xxxxxxxx1010101010101010 -"
-1/
-#10
-b1 5"
-b0 $"
-0/
-#11
-b10101010xxxxxxxx1010101010101010 ."
-b0 &"
-b0 %"
-b0 #"
-1/
-05
-b1 ,
-b1 j
-b1 x
-13
-0-
-#12
-1(
-1$
-0D
-1("
-1p
-0o
-b10 5"
-0/
+b10101010101010101010101010101010 #"
+b10101010101010101010101010101010 8"
+b10101010101010101010101010101010 C"
+b10101010101010101010101010101010 P"
+b10101010101010101010101010101010 e"
+0N
+b11 L
+b11 `
+b11 h
+b11 o
+b0 d
+b11 y
+b11 /"
+b11 7"
+b11 >"
+b11 H"
+b11 \"
+b11 d"
+b11 k"
+08
 #13
-b0 w
-b1 z
-b10101010xxxxxxxx1010101010101010 /"
-b100 Z
-b100 )"
-1/
-b1111 *
-b1111 h
-b1111 u
-b10111011101110111011101110111011 1
-b10111011101110111011101110111011 k
-b10111011101110111011101110111011 !"
-1.
-03
+b10101010101010101010101010101010 :"
+18
 #14
-0'
+b0 ^"
+b1 B"
+b0 1"
+08
+#15
+b10101010101010101010101010101010 ;"
+b0 3"
+b0 2"
+b0 0"
+18
+b0 3
+b0 w
+b0 '"
+1=
+05
+#16
+b111 *
+b111 D
+1)
+1$
+0Q
+1}
+0|
+b10 B"
+08
+#17
+b0 &"
+b0 )"
+b10101010101010101010101010101010 <"
+b111 F
+b100 g
+b100 6"
+b100 c"
+18
+b1111 0
+b1111 u
+b1111 $"
+b10111011101110111011101110111011 :
+b10111011101110111011101110111011 x
+b10111011101110111011101110111011 ."
+16
+0=
+#18
+b101 *
+b101 D
+0(
 1%
-zX
-z'"
+ze
+z4"
+za"
 z$
 1#
 1&
 bz !
-bz <
 bz I
-bz ]
-bz i
+bz V
+bz j
 bz v
-bz ,"
+bz %"
+bz 9"
+bz E"
+bz R"
+bz f"
 bz "
-bz :
 bz G
-bz \
-bz g
+bz T
+bz i
 bz t
-bz +"
-b11 5"
-b1 &"
-b1 %"
-b1 #"
-1q
-1o
-0p
-b100 l
-b100 ""
-b100 *"
-b100 1"
-b100 ?
-b100 S
-b100 [
-b100 b
-0/
-#15
+bz #"
+bz 8"
+bz C"
+bz P"
+bz e"
+1-
+b111 .
+b111 E
+b100 H"
+b100 \"
+b100 d"
+b100 k"
+b11 B"
+b1 3"
+b1 2"
+b1 0"
+1~
+1|
+0}
+b100 y
+b100 /"
+b100 7"
+b100 >"
+b100 L
+b100 `
+b100 h
+b100 o
+08
+#19
 z#
 z&
-bz 3"
-bz d
-b0 )"
-b0 Z
-1/
-#16
-z%
-1A
-b0 ?
-b0 S
-b0 [
-b0 b
-b0 T
-1n
-b0 l
-b0 ""
-b0 *"
-b0 1"
-0/
-#17
-1$
-0E
-1r
-b1 )"
-1/
-#18
-1%
-0$
-0X
-0'"
-b0 !
-b0 <
-b0 I
-b0 ]
-b0 i
-b0 v
-b0 ,"
-b1 "
-b1 :
-b1 G
-b1 \
-b1 g
-b1 t
-b1 +"
-b1 l
-b1 ""
-b1 *"
-b1 1"
-0/
-#19
-1#
-1&
-b0 f
-b0 e
-b1 d
-b11 )"
-b11 Z
-1/
+b1101 F
+bz m"
+bz @"
+bz q
+b0 c"
+b0 6"
+b0 g
+18
 #20
-0%
-0$
-0#
-0&
-1X
-1'"
-b1111 !
-b1111 <
-b1111 I
-b1111 ]
-b1111 i
-b1111 v
-b1111 ,"
-b10111011101110111011101110111011 "
-b10111011101110111011101110111011 :
-b10111011101110111011101110111011 G
-b10111011101110111011101110111011 \
-b10111011101110111011101110111011 g
-b10111011101110111011101110111011 t
-b10111011101110111011101110111011 +"
-b11 ?
-b11 S
-b11 [
-b11 b
-0n
-b11 l
-b11 ""
-b11 *"
-b11 1"
-b0 &"
-0/
+z%
+0,
+0f
+1N
+b0 L
+b0 `
+b0 h
+b0 o
+b0 a
+1{
+b0 y
+b0 /"
+b0 7"
+b0 >"
+1J"
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b1101 .
+b1101 E
+08
 #21
-b10111011101110111011101110111011 ^
-1/
-0.
+0R
+18
 #22
-1'
-1$
-0q
-b1 f
-0/
+15"
+08
 #23
-b10111011101110111011101110111011 _
-b100 )"
-b100 Z
-1/
+1$
+1!"
+b1 6"
+18
 #24
 1%
-zX
-z'"
+0$
+0e
+04"
+0a"
+b0 !
+b0 I
+b0 V
+b0 j
+b0 v
+b0 %"
+b0 9"
+b0 E"
+b0 R"
+b0 f"
+b0 "
+b0 G
+b0 T
+b0 i
+b0 t
+b0 #"
+b0 8"
+b0 C"
+b0 P"
+b0 e"
+b1 y
+b1 /"
+b1 7"
+b1 >"
+08
+#25
+1#
+1&
+b0 s
+b0 r
+b0 q
+b0 m"
+b11 g
+b11 6"
+b11 c"
+18
+#26
+0%
+0$
+1e
+14"
+1a"
+0#
+0&
+b1111 !
+b1111 I
+b1111 V
+b1111 j
+b1111 v
+b1111 %"
+b1111 9"
+b1111 E"
+b1111 R"
+b1111 f"
+b10111011101110111011101110111011 "
+b10111011101110111011101110111011 G
+b10111011101110111011101110111011 T
+b10111011101110111011101110111011 i
+b10111011101110111011101110111011 t
+b10111011101110111011101110111011 #"
+b10111011101110111011101110111011 8"
+b10111011101110111011101110111011 C"
+b10111011101110111011101110111011 P"
+b10111011101110111011101110111011 e"
+b11 H"
+b11 \"
+b11 d"
+b11 k"
+b0 3"
+0{
+b11 y
+b11 /"
+b11 7"
+b11 >"
+b11 L
+b11 `
+b11 h
+b11 o
+08
+#27
+b10111011101110111011101110111011 k
+b0 c
+b0 `"
+b0 _"
+b0 ]"
+18
+0A
+b0 4
+b0 F"
+b0 T"
+b1111 1
+b1111 D"
+b1111 Q"
+b10 2
+b10 J
+b10 X
+1<
+1>
+06
+#28
+b111 *
+b111 D
+1(
+1$
+1P
+0O
+b1 s
+0~
+1L"
+0K"
+08
+#29
+b10 Z
+b10111011101110111011101110111011 l
+b0 S"
+b0 V"
+b111 F
+b100 g
+b100 6"
+b100 c"
+18
+0<
+#30
+b11 *
+b11 D
+0)
+1%
+ze
+z4"
+za"
+z$
+bz !
+bz I
+bz V
+bz j
+bz v
+bz %"
+bz 9"
+bz E"
+bz R"
+bz f"
+bz "
+bz G
+bz T
+bz i
+bz t
+bz #"
+bz 8"
+bz C"
+bz P"
+bz e"
+1#
+1&
+1,
+b111 .
+b111 E
+b1 `"
+b1 _"
+b1 ]"
+b100 H"
+b100 \"
+b100 d"
+b100 k"
+b100 y
+b100 /"
+b100 7"
+b100 >"
+b10 s
+b1 d
+b1 c
+b1 a
+1O
+0P
+b100 L
+b100 `
+b100 h
+b100 o
+08
+#31
+z#
+z&
+b1011 F
+bz m"
+b1 Z"
+bz q
+b0 c"
+b0 6"
+b0 g
+18
+b1 4
+b1 F"
+b1 T"
+b11001100110011001100110011001100 ;
+b11001100110011001100110011001100 G"
+b11001100110011001100110011001100 ["
+0>
+#32
+z%
+b10 *
+b10 D
+0'
+0-
+b0 L
+b0 `
+b0 h
+b0 o
+05"
+1{
+b0 y
+b0 /"
+b0 7"
+b0 >"
+b0 0"
+1K"
+0L"
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b10 _"
+b10 ]"
+b10 `"
+b1011 .
+b1011 E
+08
+#33
+b1110 F
+0!"
+18
+#34
+0+
+1-
+b1110 .
+b1110 E
+1f
+08
+#35
+1$
+1R
+b1 g
+18
+#36
+b110 *
+b110 D
+1)
+1%
+0$
+0e
+04"
+0a"
+b0 !
+b0 I
+b0 V
+b0 j
+b0 v
+b0 %"
+b0 9"
+b0 E"
+b0 R"
+b0 f"
+b10 "
+b10 G
+b10 T
+b10 i
+b10 t
+b10 #"
+b10 8"
+b10 C"
+b10 P"
+b10 e"
+0f
+b1 L
+b1 `
+b1 h
+b1 o
+1b"
+08
+#37
+1#
+1&
+b0 B"
+b10 @"
+b10 m"
+b11 g
+b11 6"
+0N"
+b11 c"
+18
+#38
+0%
+1$
+0#
+0&
+1e
+14"
+1a"
+b1111 !
+b1111 I
+b1111 V
+b1111 j
+b1111 v
+b1111 %"
+b1111 9"
+b1111 E"
+b1111 R"
+b1111 f"
+b10101010101010101010101010101010 "
+b10101010101010101010101010101010 G
+b10101010101010101010101010101010 T
+b10101010101010101010101010101010 i
+b10101010101010101010101010101010 t
+b10101010101010101010101010101010 #"
+b10101010101010101010101010101010 8"
+b10101010101010101010101010101010 C"
+b10101010101010101010101010101010 P"
+b10101010101010101010101010101010 e"
+b11 H"
+b11 \"
+b11 d"
+b11 k"
+b11 y
+b11 /"
+b11 7"
+b11 >"
+b0 d
+0N
+b11 L
+b11 `
+b11 h
+b11 o
+08
+#39
+b10101010101010101010101010101010 g"
+b100 c"
+b100 6"
+b100 g
+18
+#40
+1%
+ze
+z4"
+za"
+z$
+bz !
+bz I
+bz V
+bz j
+bz v
+bz %"
+bz 9"
+bz E"
+bz R"
+bz f"
+bz "
+bz G
+bz T
+bz i
+bz t
+bz #"
+bz 8"
+bz C"
+bz P"
+bz e"
+1#
+1&
+b100 L
+b100 `
+b100 h
+b100 o
+b100 y
+b100 /"
+b100 7"
+b100 >"
+b100 H"
+b100 \"
+b100 d"
+b100 k"
+b1 o"
+08
+#41
+z#
+z&
+bz @"
+bz m"
+b0 g
+b0 6"
+b0 c"
+18
+#42
+z%
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b0 y
+b0 /"
+b0 7"
+b0 >"
+b0 a
+1N
+b0 L
+b0 `
+b0 h
+b0 o
+08
+#43
+1$
+1N"
+b1 c"
+0R
+18
+#44
+1%
+0$
+0e
+04"
+0a"
+b0 !
+b0 I
+b0 V
+b0 j
+b0 v
+b0 %"
+b0 9"
+b0 E"
+b0 R"
+b0 f"
+b0 "
+b0 G
+b0 T
+b0 i
+b0 t
+b0 #"
+b0 8"
+b0 C"
+b0 P"
+b0 e"
+b1 H"
+b1 \"
+b1 d"
+b1 k"
+08
+#45
+1#
+1&
+b0 s
+b0 q
+b0 @"
+b11 g
+b11 6"
+b11 c"
+18
+#46
+0%
+1$
+1e
+14"
+1a"
+0#
+0&
+b1111 !
+b1111 I
+b1111 V
+b1111 j
+b1111 v
+b1111 %"
+b1111 9"
+b1111 E"
+b1111 R"
+b1111 f"
+b11001100110011001100110011001100 "
+b11001100110011001100110011001100 G
+b11001100110011001100110011001100 T
+b11001100110011001100110011001100 i
+b11001100110011001100110011001100 t
+b11001100110011001100110011001100 #"
+b11001100110011001100110011001100 8"
+b11001100110011001100110011001100 C"
+b11001100110011001100110011001100 P"
+b11001100110011001100110011001100 e"
+b0 `"
+0J"
+b11 H"
+b11 \"
+b11 d"
+b11 k"
+b11 y
+b11 /"
+b11 7"
+b11 >"
+b11 L
+b11 `
+b11 h
+b11 o
+08
+#47
+b11001100110011001100110011001100 k
+b100 c"
+b100 6"
+b100 g
+18
+#48
+1%
+ze
+z4"
+za"
 z$
 1#
 1&
 bz !
-bz <
 bz I
-bz ]
-bz i
+bz V
+bz j
 bz v
-bz ,"
+bz %"
+bz 9"
+bz E"
+bz R"
+bz f"
 bz "
-bz :
 bz G
-bz \
-bz g
+bz T
+bz i
 bz t
-bz +"
-b100 ?
-b100 S
-b100 [
-b100 b
-b10 f
-b100 l
-b100 ""
-b100 *"
-b100 1"
-0/
-#25
+bz #"
+bz 8"
+bz C"
+bz P"
+bz e"
+b100 L
+b100 `
+b100 h
+b100 o
+b1 s
+b100 y
+b100 /"
+b100 7"
+b100 >"
+b100 H"
+b100 \"
+b100 d"
+b100 k"
+08
+#49
 z#
 z&
-bz d
-b0 Z
-b0 )"
-1/
-#26
-z%
-b0 #"
-1n
-b0 l
-b0 ""
-b0 *"
-b0 1"
-b0 ?
-b0 S
-b0 [
-b0 b
-0/
-#27
-0r
-1/
-#28
-0/
-#29
-1/
-#30
-0/
-#31
-1/
-#32
-0/
-#33
-1/
-#34
-0/
-#35
-1/
-#36
-0/
-#37
-1/
-#38
-0/
-#39
-1/
-#40
-0/
-#41
-1/
-#42
-0/
-#43
-1/
-#44
-0/
-#45
-1/
-#46
-0/
-#47
-1/
-#48
-0/
-#49
-1/
+bz q
+bz @"
+b0 g
+b0 6"
+b0 c"
+18
 #50
-0/
+z%
+b110 *
+b110 D
+0'
+1$
+b1 ]"
+1J"
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b0 y
+b0 /"
+b0 7"
+b0 >"
+b0 L
+b0 `
+b0 h
+b0 o
+08
 #51
-1/
+b1 c"
+1N"
+18
 #52
-0/
+b111 *
+b111 D
+1'
+1%
+0$
+0e
+04"
+0a"
+b0 !
+b0 I
+b0 V
+b0 j
+b0 v
+b0 %"
+b0 9"
+b0 E"
+b0 R"
+b0 f"
+b1 "
+b1 G
+b1 T
+b1 i
+b1 t
+b1 #"
+b1 8"
+b1 C"
+b1 P"
+b1 e"
+b1 H"
+b1 \"
+b1 d"
+b1 k"
+08
 #53
-1/
+1#
+1&
+b0 s
+b1 q
+b1 @"
+b111 F
+b11 g
+b11 6"
+b11 c"
+18
 #54
-0/
+0%
+1$
+1e
+14"
+1a"
+0#
+0&
+b1111 !
+b1111 I
+b1111 V
+b1111 j
+b1111 v
+b1111 %"
+b1111 9"
+b1111 E"
+b1111 R"
+b1111 f"
+b11001100110011001100110011001100 "
+b11001100110011001100110011001100 G
+b11001100110011001100110011001100 T
+b11001100110011001100110011001100 i
+b11001100110011001100110011001100 t
+b11001100110011001100110011001100 #"
+b11001100110011001100110011001100 8"
+b11001100110011001100110011001100 C"
+b11001100110011001100110011001100 P"
+b11001100110011001100110011001100 e"
+1+
+b111 .
+b111 E
+0J"
+b11 H"
+b11 \"
+b11 d"
+b11 k"
+b11 y
+b11 /"
+b11 7"
+b11 >"
+b11 L
+b11 `
+b11 h
+b11 o
+08
 #55
-1/
+b11001100110011001100110011001100 :"
+b100 c"
+b100 6"
+b100 g
+18
 #56
-0/
+1%
+ze
+z4"
+za"
+z$
+1#
+1&
+bz !
+bz I
+bz V
+bz j
+bz v
+bz %"
+bz 9"
+bz E"
+bz R"
+bz f"
+bz "
+bz G
+bz T
+bz i
+bz t
+bz #"
+bz 8"
+bz C"
+bz P"
+bz e"
+b100 L
+b100 `
+b100 h
+b100 o
+b100 y
+b100 /"
+b100 7"
+b100 >"
+b1 B"
+0b"
+b100 H"
+b100 \"
+b100 d"
+b100 k"
+08
 #57
-1/
+z#
+z&
+bz q
+bz @"
+b0 g
+b0 6"
+b0 c"
+18
 #58
-0/
+z%
+b0 ]"
+1J"
+b0 H"
+b0 \"
+b0 d"
+b0 k"
+b0 y
+b0 /"
+b0 7"
+b0 >"
+b0 L
+b0 `
+b0 h
+b0 o
+08
 #59
-1/
+0N"
+18
 #60
-0/
+08
 #61
-1/
+18
+#62
+08
+#63
+18
+#64
+08
+#65
+18
+#66
+08
+#67
+18
+#68
+08
+#69
+18
+#70
+08
+#71
+18

@@ -71,6 +71,9 @@ always @(posedge clk) begin
                 next_state = address;
                 bus_is_mine = 1;
             end
+            if (fgnt && !req && !frame) begin
+                bus_is_mine = 0;
+            end
             if (!frame && !bus_is_mine) begin
                 if (rd_wr) begin
                     next_state = turnaround;               
