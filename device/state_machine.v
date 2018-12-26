@@ -63,7 +63,6 @@ end
 
 always @(posedge clk) begin
     case (state)
-
         idle: begin
             fvalid = 1;
             bus_is_mine = 0 ;
