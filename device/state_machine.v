@@ -1,5 +1,5 @@
 module State_Machine(
-    frame, irdy, trdy, devsel, state, clk, force_req, burst, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid, fburst
+    frame, irdy, trdy, devsel, state, clk, force_req, burst, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid, fburst, bus_is_mine
 );
 
 /*
@@ -29,11 +29,12 @@ output reg          //flags that contributes in synchronization of bus lines
     fend_count,     //indicates deassertion of force_req signal
     ffinished,      //indicates finished transaction and free bus
     fvalid,         //indicates that a valid data transfer may occur next positive edge of clock **combinational
-    fburst;
+    fburst,
+    bus_is_mine;
 reg fgnt;           //indicates a granted bus ownership
 
 always @(negedge clk) begin
-    state <= next_state;
+    state <= next_state;      
     if (force_req) begin
         fend_count <= 0;
         fcount <= 1; 
@@ -60,11 +61,24 @@ always @(negedge clk) begin
     end
 end
 
-always @(*) begin
+always @(posedge clk) begin
     case (state)
 
-        idle: if (fgnt && !req) begin
-            next_state = address;
+        idle: begin
+            fvalid = 1;
+            bus_is_mine = 0 ;
+            if (fgnt && !req) begin
+                next_state = address;
+                bus_is_mine = 1;
+            end
+            if (!frame && !bus_is_mine) begin
+                if (rd_wr) begin
+                    next_state = turnaround;               
+                end
+                else begin
+                    next_state = data;
+                end
+            end
         end
 
         address: begin
@@ -76,20 +90,22 @@ always @(*) begin
                     next_state = data;
                 end
             end
+            fvalid = 1;
         end
 
         turnaround: begin
+            fvalid = 1;
             next_state = data;
         end
 
         data: begin
-            if(~fgnt) begin
+            if(fgnt === 0 && bus_is_mine) begin
                 next_state = finish; 
             end
             if (frame) begin
                 next_state = finish; 
             end
-            if(!trdy && !irdy) begin
+            if(trdy === 0 && irdy === 0 && devsel === 0) begin
                 fvalid = 1; 
             end else begin
                 fvalid = 0; 

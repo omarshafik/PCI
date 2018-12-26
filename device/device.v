@@ -14,16 +14,16 @@ always @ (reset_address) begin
 end
 
 State_Machine sm(
-    frame, irdy, trdy, devsel, state, clk, force_req, burst, req, gnt, rd_wr, fcount, fend_count, ffinished, fvalid, fburst
+    frame, irdy, trdy, devsel, state, clk, force_req, burst, req, gnt, C_BE[0], fcount, fend_count, ffinished, fvalid, fburst, bus_is_mine
 );
 
 Initiator_Controller ic(
     devaddress, BE, force_req, rd_wr, write_data, clk, AD, C_BE, frame, irdy, req, 
-    state, fcount, fend_count, ffinished, fvalid, fburst
+    state, fcount, fend_count, ffinished, fvalid, bus_is_mine, fburst
 );
 
 Target_Controller tc(
-    clk, AD, C_BE, devsel, trdy, state, fvalid, tar_add
+    clk, AD, C_BE, devsel, trdy, state, fvalid, tar_add, frame
 );
 
 

@@ -1,8 +1,8 @@
 module Initiator_Controller(
-    input [1:0]devaddress, input [3:0] BE, input force_req, input rd_wr, input[31:0] write_data,
+    input [1:0]devaddress, input[3:0] BE, input force_req, input rd_wr, input[31:0] write_data,
     input clk, inout[31:0] AD, output[3:0] C_BE, output frame, output irdy,
     output req,
-    input[2:0] state, input fcount, input fend_count, input ffinished, input fvalid,
+    input[2:0] state, input fcount, input fend_count, input ffinished, input fvalid, input bus_is_mine,
     input fburst    // extra input for burst read (active high)
     );
 
@@ -12,21 +12,22 @@ module Initiator_Controller(
   **In Normal mode the intiator completes one data transfer and continues to the next transaction.
 */
 
-reg[3:0] command;
-reg[3:0] byte_enable[7:0];
+reg[3:0] command[0:3];
+wire[3:0] comm;
+assign comm = command[0];
 /*
     when force_req signal is asserted, at every positive edge a corresponding target-address and command is saved
     in internal memory  
 */
 always @ (posedge clk) begin
-    if (force_req) begin
+    if (fcount) begin
         memory[9 - counter] <= devaddress;
-        command <= rd_wr;
+        command[counter] <= rd_wr;
     end
 end
 
 parameter[2:0]    
-idle=0, address=1, turnaround=2, data=3, finish=4;  //states are declared in State_Machine module
+idle=0, address=3'b001, turnaround=3'b010, data=3'b011, finish=3'b100;  //states are declared in State_Machine module
 
 /*************************** count number of required transactions by master ******************************/
             /* frame shall not get asserted before force_req signal gets deasserted */
@@ -39,11 +40,11 @@ always @ (negedge clk) begin
         max <= counter + 1;
         failed_counter <= 0;
     end
-    if (state == finish && !fburst && bus_is_mine) begin
+    if (state == finish && (!fburst || failed_counter > 4) && bus_is_mine) begin
         counter <= counter - 1; 
         failed_counter <= 0;
     end
-    if (state == data && !fvalid) begin
+    if ((state == data || state == turnaround) && !fvalid && fburst) begin
         failed_counter <= failed_counter + 1;
     end
     if (state == data && fvalid) begin
@@ -53,32 +54,24 @@ end
 always @ (posedge force_req) begin
     counter <= 0;
     max <= 0;  
+    mp <= 0;
 end
 
 ////////////////////////////////////* send request to arbiter *////////////////////////////////////////////////
-reg bus_is_mine;    // indicate whether the bus is in this controller's command (active high)
-assign req = (fend_count === 1 && ((counter && (fburst || failed_counter < 4 || !bus_is_mine)) || counter > 1)) ? 0 : 1; // MUST REVIEW
-always @ (*) begin
-    if (fcount) begin
-        bus_is_mine = 0; 
-    end
-    if (state == address) begin
-        bus_is_mine = 1; 
-    end
-    if (bus_is_mine && ffinished) begin
-        bus_is_mine = 0; 
-    end
-end
+assign req = (fend_count === 1 && 
+                ((counter && 
+                (!bus_is_mine || (bus_is_mine && state == idle) || (bus_is_mine && fburst && failed_counter < 4))
+                || counter > 1))) ? 0 : 1; // MUST REVIEW
 
 ////////////////////////////////////////////* set frame *////////////////////////////////////////////////////
-assign frame = (bus_is_mine === 1 && state != finish && counter) ? ( (state == address || fburst || failed_counter < 4) ? 0 : 1) : 1'bz;  //multi transactions 
+assign frame = (bus_is_mine === 1 && state != finish && counter) ? ( (state == address || ( (state == data || state == turnaround ) && (fburst && (failed_counter < 4) ) ) ) ? 0 : 1) : 1'bz;  //multi transactions 
 
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
-assign AD = (state == address && bus_is_mine === 1) ? memory[9 - max + counter] : (command === 0 && state === data) ? write_data : 32'hZZZZZZZZ;
-assign C_BE = (state == address && bus_is_mine === 1) ? command : (state === data) ? BE : 4'bzzzz;
+assign AD = (state == address && bus_is_mine === 1) ? memory[9 - max + counter] : (bus_is_mine && command[max-counter] === 0 && state === data) ? write_data : 32'hZZZZZZZZ;
+assign C_BE = (state == address && bus_is_mine === 1) ? command[max-counter] : ( (state === data && bus_is_mine) ? BE : 4'bzzzz );
 
 ////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
-assign irdy = (bus_is_mine === 1 && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine === 1 && state == finish) ? 1 : 1'bz );
+assign irdy = (bus_is_mine === 1 && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine === 1 && (state == finish || state == address) ) ? 1 : 1'bz );
 
 ////////////////////////////////////////////* read data *////////////////////////////////////////////////////
                             /* read data is saved in this internal memory */
@@ -94,16 +87,26 @@ assign mem9 = memory[8];
 assign mem10 = memory[9];
 
 always @ (posedge clk) begin
-    if (bus_is_mine && (state == data && fvalid) && command == 1) begin
+    if (bus_is_mine && (state == data && fvalid) && command[max-counter] == 1) begin
         memory[mp] <= AD;
     end
     if (state == idle && counter == 0) begin
         mp <= 0; 
     end
+    if (fcount) begin
+        memory[9-mp] <= devaddress; 
+    end
+
 end
 always @ (negedge clk) begin    // increment memory pointer
-    if (bus_is_mine && (state == data && fvalid) && mp < 8) begin
+    if (bus_is_mine && (state == data && fvalid) && mp < 8 && command[max-counter] == 1) begin
         mp <= mp + 1; 
+    end
+    if (fcount) begin
+        mp <= mp + 1; 
+    end
+    if (state == address) begin
+        mp <= 0; 
     end
 end
 
