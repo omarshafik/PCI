@@ -8,7 +8,6 @@ module test;
     wire[3:0] C_BE;
     reg force_reqA, force_reqB, clk, gntA, gntB, rd_wrA, rd_wrB, burstA, burstB, rframe, reset_add;
     inout frame, irdy, reqA, reqB;
-    // assign frame = rframe;
     wire[31:0] d;
     initial begin
         $dumpfile("test.vcd");
