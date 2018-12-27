@@ -3,7 +3,7 @@ module Initiator_Controller(
     input clk, inout[31:0] AD, output[3:0] C_BE, output frame, output irdy,
     output req,
     input[2:0] state, input fcount, input fend_count, input ffinished, input fvalid, input bus_is_mine,
-    input fburst    // extra input for burst read (active high)
+    input fburst    // extra input for burst transactions (active high)
     );
 
 /*
@@ -64,11 +64,12 @@ assign req = (fend_count === 1 &&
                 || counter > 1))) ? 0 : 1; // MUST REVIEW
 
 ////////////////////////////////////////////* set frame *////////////////////////////////////////////////////
-assign frame = (bus_is_mine === 1 && state != finish && counter) ? ( (state == address || ( (state == data || state == turnaround ) && (fburst && (failed_counter < 4) ) ) ) ? 0 : 1) : 1'bz;  //multi transactions 
+assign frame = (bus_is_mine === 1 && state != finish && counter) ?
+ ( (state == address || ( (state == data || state == turnaround ) && (fburst && (failed_counter < 4) ) ) ) ? 0 : 1) : 1'bz;  //multi transactions 
 
 ///////////////////////////////////////////* set AD with address *//////////////////////////////////////////
 assign AD = (state == address && bus_is_mine === 1) ? memory[9 - max + counter] : (bus_is_mine && command[max-counter] === 0 && state === data) ? write_data : 32'hZZZZZZZZ;
-assign C_BE = (state == address && bus_is_mine === 1) ? command[max-counter] : ( (state === data && bus_is_mine) ? BE : 4'bzzzz );
+assign C_BE = (state == address && bus_is_mine === 1) ? command[max - counter] : ( (state === data && bus_is_mine) ? BE : 4'bzzzz );
 
 ////////////////////////////////////////////* set irdy *////////////////////////////////////////////////////
 assign irdy = (bus_is_mine === 1 && (state == turnaround || state == data)) ? 0 : ( (bus_is_mine === 1 && (state == finish || state == address) ) ? 1 : 1'bz );
