@@ -17,7 +17,7 @@ initial begin
     $dumpfile("test.vcd");
     $dumpvars(0,test);
     rframe = 1'bz;
-    force_reqA = 0; force_reqB = 0; rd_wrA = 0; rd_wrB = 0;
+    force_reqA = 0; force_reqB = 0; force_reqC = 0; rd_wrA = 0; rd_wrB = 0;
     burstA = 0; burstB = 0; burstC = 0; reset_add = 1; addressA = A; addressB = B; addressC = C;
     clk = 0;
     #1
@@ -34,15 +34,13 @@ initial begin
     burstA = 0;
     
     force_reqB = 1;
-    addressB = A;
+    addressB = 3;
     rd_wrB = 0;
     #2
     force_reqB = 0;
     burstB = 1;
     datB = 32'hBBBBBBBB;
     BE_B = 4'b1111;
-    #10
-    burstB = 0;
 
     force_reqC = 1;
     #2
@@ -51,7 +49,7 @@ initial begin
     BE_C = 4'b1111;
     addressC = A;
     rd_wrA = 0;
-    rd_wrC = 0;
+    rd_wrC = 1;
     #2
     force_reqA = 0;
     force_reqC = 0;    

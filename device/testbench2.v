@@ -7,7 +7,8 @@ reg[31:0] datA; reg[31:0] datB; reg[31:0] datC;
 reg[3:0] BE_A; reg[3:0] BE_B; reg[3:0] BE_C;
 wire[3:0] C_BE;
 wire[3:0] gnt;
-assign gntA = gnt[1]; assign gntB = gnt[2]; assign gntC = gnt[3];
+assign gntA = gnt[1]; assign gntC = gnt[3];
+reg gntB;
 wire[3:0] req;
 assign req = {reqC, reqB, reqA, 1'b1};
 wire frame, irdy, reqA, reqB, reqC;
@@ -17,22 +18,21 @@ initial begin
     $dumpfile("test.vcd");
     $dumpvars(0,test);
     rframe = 1'bz;
-    force_reqA = 0; force_reqB = 0; rd_wrA = 0; rd_wrB = 0;
+    force_reqA = 0; force_reqB = 0; force_reqC = 0; rd_wrA = 0; rd_wrB = 0;
     burstA = 0; burstB = 0; burstC = 0; reset_add = 1; addressA = A; addressB = B; addressC = C;
     clk = 0;
     #1
     reset_add = 0;
     force_reqA = 1;
-    addressA = B;
+    addressA = 3;
     rd_wrA = 0;
     #2
     force_reqA = 0;
     burstA = 1;
     datA = 32'hAAAAAAAA;
     BE_A = 4'b1111;
-    #12
+    #20
     burstA = 0;
-    
     force_reqB = 1;
     addressB = A;
     rd_wrB = 0;
@@ -41,9 +41,16 @@ initial begin
     burstB = 1;
     datB = 32'hBBBBBBBB;
     BE_B = 4'b1111;
-    #10
+    gntB = 0;
+    #6
+    gntB = 1;
+    #4
     burstB = 0;
 
+    #10
+    gntB = 0;
+    #10
+    gntB = 1;
     force_reqC = 1;
     #2
     force_reqA = 1;
